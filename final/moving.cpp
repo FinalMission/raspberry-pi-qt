@@ -9,19 +9,29 @@ MOVING::MOVING(QWidget *parent) :
     ui(new Ui::MOVING)
 {
     ui->setupUi(this);
+
+    nowZoom = 100.0;
+
     Pressed=false;
-    QPixmap pix("9thfloor2.png");
+    QPixmap pix(":/img/9thfloor2.png");
     scene.addPixmap(pix);
     ui->graphicsView->setScene(&scene);
     ui->graphicsView->show();
     QBrush redBrush(Qt::red);
     QPen blackPen(Qt::black);
     ellipse = scene.addEllipse(180, 100, 30, 30, blackPen, redBrush);
-    ellipse->setPos(200,100);
-     ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
+    ellipse->setPos(200,200);
+//    ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+  //  ui->graphicsView->setViewport(this);
+    ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
+  //  ui->graphicsView->s
 //    ui->graphicsView->setAttribute(Qt::WA_AcceptTouchEvents);
 //    this->setCursor(Qt::BlankCursor);
-//    this->setAttribute(Qt::WA_TransparentForMouseEvents);
+    this->setAttribute(Qt::WA_TransparentForMouseEvents);
+
+    ui->horizontalSlider->setValue(50);
+
+
 }
 
 MOVING::~MOVING()
@@ -48,7 +58,9 @@ void MOVING::wheelEvent(QWheelEvent *event)
            }
 }*/
 /*
-bool MOVING::eventFilter(QObject *object, QEvent *event) {
+bool MOVING::eventFilter(QObject *object, QEvent *event)
+{
+
    if (event->type() == QEvent::MouseMove)
    {
         mousePressEvent((QMouseEvent*)event);
@@ -58,7 +70,8 @@ bool MOVING::eventFilter(QObject *object, QEvent *event) {
    {
 //       wheelEvent((QWheelEvent*)event);
    }
-   else if (event->type() == QEvent::TouchBegin || event->type() == QEvent::TouchUpdate || event->type() == QEvent::TouchEnd)
+
+   if (event->type() == QEvent::TouchBegin || event->type() == QEvent::TouchUpdate || event->type() == QEvent::TouchEnd)
    {
        QTouchEvent *touchEvent = static_cast<QTouchEvent *>(event);
        QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
@@ -86,6 +99,7 @@ bool MOVING::eventFilter(QObject *object, QEvent *event) {
 /*
 bool MOVING::viewportEvent(QEvent *event)
 {
+    this->setAttribute(Qt::WA_TransparentForMouseEvents);
     switch (event->type()) {
     case QEvent::TouchBegin:
     case QEvent::TouchUpdate:
@@ -117,6 +131,7 @@ bool MOVING::viewportEvent(QEvent *event)
     return MOVING::viewportEvent(event);
 }
 */
+
 void MOVING::mousePressEvent(QMouseEvent *event)
 {
     //qDebug() << "pressed";
@@ -144,5 +159,24 @@ void MOVING::mouseReleaseEvent(QMouseEvent *event)
     qDebug() << "released";
     Pressed=false;
     update();
+}
+
+
+void MOVING::on_horizontalSlider_valueChanged(int value)
+{
+    beforeZoom = nowZoom;
+    nowZoom = 50.0+1.0*value;
+
+    ui->graphicsView->scale(nowZoom/beforeZoom, nowZoom/beforeZoom);
+}
+
+void MOVING::on_horizontalSlider_sliderMoved(int value)
+{
+    printf("hello %d \n", value);
+
+    beforeZoom = nowZoom;
+    nowZoom = 50.0+1.0*value;
+
+    ui->graphicsView->scale(nowZoom/beforeZoom, nowZoom/beforeZoom);
 }
 
