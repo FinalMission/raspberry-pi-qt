@@ -18,6 +18,5 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     MOVING dlg;
-    dlg.setWindowFlags(Qt::FramelessWindowHint);
     dlg.exec();
 }
