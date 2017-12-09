@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_BLUETOOTH_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../final -I. -isystem /usr/include/arm-linux-gnueabihf/qt5 -isystem /usr/include/arm-linux-gnueabihf/qt5/QtWidgets -isystem /usr/include/arm-linux-gnueabihf/qt5/QtGui -isystem /usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I. -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++
+INCPATH       = -I../final -I. -isystem /usr/include/arm-linux-gnueabihf/qt5 -isystem /usr/include/arm-linux-gnueabihf/qt5/QtWidgets -isystem /usr/include/arm-linux-gnueabihf/qt5/QtGui -isystem /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth -isystem /usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I. -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib/arm-linux-gnueabihf/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -35,8 +35,8 @@ COMPRESS      = gzip -9f
 DISTNAME      = final1.0.0
 DISTDIR = /home/pi/workspace/raspberry-pi-qt/build-final-Desktop-Debug/.tmp/final1.0.0
 LINK          = g++
-LFLAGS        = 
-LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Core -lGLESv2 -lpthread 
+LFLAGS        = -Wl,-rpath-link,/usr/lib/arm-linux-gnueabihf
+LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Bluetooth -lQt5DBus -lQt5Core -lGLESv2 -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -55,14 +55,12 @@ SOURCES       = ../final/main.cpp \
 		../final/kfsol.c \
 		../final/mainmenu.cpp \
 		../final/mapsettings.cpp \
-		../final/bluetoothsetting.cpp \
-		../final/virtualkeyboard.cpp qrc_MyResources.cpp \
+		bluetoothsetting.cpp \
+		virtualkeyboard.cpp qrc_MyResources.cpp \
 		moc_mainwindow.cpp \
 		moc_moving.cpp \
 		moc_mainmenu.cpp \
-		moc_mapsettings.cpp \
-		moc_bluetoothsetting.cpp \
-		moc_virtualkeyboard.cpp
+		moc_mapsettings.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		moving.o \
@@ -76,9 +74,7 @@ OBJECTS       = main.o \
 		moc_mainwindow.o \
 		moc_moving.o \
 		moc_mainmenu.o \
-		moc_mapsettings.o \
-		moc_bluetoothsetting.o \
-		moc_virtualkeyboard.o
+		moc_mapsettings.o
 DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/common/unix.conf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/common/linux.conf \
@@ -146,22 +142,19 @@ DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/lex.prf \
 		../final/final.pro ../final/mainwindow.h \
 		../final/moving.h \
-		../final/kfsol.h \
 		../final/shm.h \
 		../final/trisol.h \
 		../final/kfsol.h \
 		../final/mainmenu.h \
-		../final/mapsettings.h \
-		../final/bluetoothsetting.h \
-		../final/virtualkeyboard.h ../final/main.cpp \
+		../final/mapsettings.h ../final/main.cpp \
 		../final/mainwindow.cpp \
 		../final/moving.cpp \
 		../final/trisol.c \
 		../final/kfsol.c \
 		../final/mainmenu.cpp \
 		../final/mapsettings.cpp \
-		../final/bluetoothsetting.cpp \
-		../final/virtualkeyboard.cpp
+		bluetoothsetting.cpp \
+		virtualkeyboard.cpp
 QMAKE_TARGET  = final
 DESTDIR       = 
 TARGET        = final
@@ -242,6 +235,7 @@ Makefile: ../final/final.pro /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++/
 		../final/MyResources.qrc \
 		/usr/lib/arm-linux-gnueabihf/libQt5Widgets.prl \
 		/usr/lib/arm-linux-gnueabihf/libQt5Gui.prl \
+		/usr/lib/arm-linux-gnueabihf/libQt5Bluetooth.prl \
 		/usr/lib/arm-linux-gnueabihf/libQt5Core.prl
 	$(QMAKE) -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug -o Makefile ../final/final.pro
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf:
@@ -313,6 +307,7 @@ Makefile: ../final/final.pro /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++/
 ../final/MyResources.qrc:
 /usr/lib/arm-linux-gnueabihf/libQt5Widgets.prl:
 /usr/lib/arm-linux-gnueabihf/libQt5Gui.prl:
+/usr/lib/arm-linux-gnueabihf/libQt5Bluetooth.prl:
 /usr/lib/arm-linux-gnueabihf/libQt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug -o Makefile ../final/final.pro
@@ -329,9 +324,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../final/MyResources.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../final/mainwindow.h ../final/moving.h ../final/kfsol.h ../final/shm.h ../final/trisol.h ../final/kfsol.h ../final/mainmenu.h ../final/mapsettings.h ../final/bluetoothsetting.h ../final/virtualkeyboard.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../final/main.cpp ../final/mainwindow.cpp ../final/moving.cpp ../final/trisol.c ../final/kfsol.c ../final/mainmenu.cpp ../final/mapsettings.cpp ../final/bluetoothsetting.cpp ../final/virtualkeyboard.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../final/mainwindow.ui ../final/moving.ui ../final/mainmenu.ui ../final/mapsettings.ui ../final/bluetoothsetting.ui ../final/virtualkeyboard.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../final/mainwindow.h ../final/moving.h ../final/shm.h ../final/trisol.h ../final/kfsol.h ../final/mainmenu.h ../final/mapsettings.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../final/main.cpp ../final/mainwindow.cpp ../final/moving.cpp ../final/trisol.c ../final/kfsol.c ../final/mainmenu.cpp ../final/mapsettings.cpp bluetoothsetting.cpp virtualkeyboard.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../final/mainwindow.ui ../final/moving.ui ../final/mainmenu.ui ../final/mapsettings.ui bluetoothsetting.ui virtualkeyboard.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -366,33 +361,24 @@ qrc_MyResources.cpp: ../final/MyResources.qrc \
 		../final/img/17thfloor.png
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/rcc -name MyResources ../final/MyResources.qrc -o qrc_MyResources.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_moving.cpp moc_mainmenu.cpp moc_mapsettings.cpp moc_bluetoothsetting.cpp moc_virtualkeyboard.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_moving.cpp moc_mainmenu.cpp moc_mapsettings.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_moving.cpp moc_mainmenu.cpp moc_mapsettings.cpp moc_bluetoothsetting.cpp moc_virtualkeyboard.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_moving.cpp moc_mainmenu.cpp moc_mapsettings.cpp
 moc_mainwindow.cpp: ../final/mainwindow.h \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/moc
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtBluetooth -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/mainwindow.h -o moc_mainwindow.cpp
 
-moc_moving.cpp: ../final/kfsol.h \
-		../final/moving.h \
+moc_moving.cpp: ../final/moving.h \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/moc
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/moving.h -o moc_moving.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtBluetooth -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/moving.h -o moc_moving.cpp
 
 moc_mainmenu.cpp: ../final/mainmenu.h \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/moc
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/mainmenu.h -o moc_mainmenu.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtBluetooth -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/mainmenu.h -o moc_mainmenu.cpp
 
 moc_mapsettings.cpp: ../final/mapsettings.h \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/moc
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/mapsettings.h -o moc_mapsettings.cpp
-
-moc_bluetoothsetting.cpp: ../final/bluetoothsetting.h \
-		/usr/lib/arm-linux-gnueabihf/qt5/bin/moc
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/bluetoothsetting.h -o moc_bluetoothsetting.cpp
-
-moc_virtualkeyboard.cpp: ../final/virtualkeyboard.h \
-		/usr/lib/arm-linux-gnueabihf/qt5/bin/moc
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/virtualkeyboard.h -o moc_virtualkeyboard.cpp
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtBluetooth -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/mapsettings.h -o moc_mapsettings.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -415,13 +401,13 @@ ui_mapsettings.h: ../final/mapsettings.ui \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/uic
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/uic ../final/mapsettings.ui -o ui_mapsettings.h
 
-ui_bluetoothsetting.h: ../final/bluetoothsetting.ui \
+ui_bluetoothsetting.h: bluetoothsetting.ui \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/uic
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/uic ../final/bluetoothsetting.ui -o ui_bluetoothsetting.h
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/uic bluetoothsetting.ui -o ui_bluetoothsetting.h
 
-ui_virtualkeyboard.h: ../final/virtualkeyboard.ui \
+ui_virtualkeyboard.h: virtualkeyboard.ui \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/uic
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/uic ../final/virtualkeyboard.ui -o ui_virtualkeyboard.h
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/uic virtualkeyboard.ui -o ui_virtualkeyboard.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -433,25 +419,24 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
-main.o: ../final/main.cpp ../final/mainwindow.h \
-		../final/kfsol.h
+main.o: ../final/main.cpp ../final/mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../final/main.cpp
 
 mainwindow.o: ../final/mainwindow.cpp ../final/mainwindow.h \
 		ui_mainwindow.h \
 		../final/moving.h \
-		../final/kfsol.h \
 		ui_moving.h \
 		../final/shm.h \
-		../final/mainmenu.h \
-		../final/bluetoothsetting.h
+		../final/mainmenu.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../final/mainwindow.cpp
 
 moving.o: ../final/moving.cpp ../final/moving.h \
-		../final/kfsol.h \
 		ui_moving.h \
 		../final/shm.h \
-		../final/trisol.h
+		../final/kfsol.h \
+		../final/trisol.h \
+		../final/mapsettings.h \
+		ui_mapsettings.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moving.o ../final/moving.cpp
 
 trisol.o: ../final/trisol.c ../final/trisol.h
@@ -463,26 +448,20 @@ kfsol.o: ../final/kfsol.c ../final/kfsol.h
 mainmenu.o: ../final/mainmenu.cpp ../final/mainmenu.h \
 		ui_mainmenu.h \
 		../final/moving.h \
-		../final/kfsol.h \
-		../final/mapsettings.h \
-		../final/bluetoothsetting.h
+		../final/mapsettings.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainmenu.o ../final/mainmenu.cpp
 
 mapsettings.o: ../final/mapsettings.cpp ../final/mapsettings.h \
 		ui_mapsettings.h \
 		../final/moving.h \
-		../final/kfsol.h \
 		ui_moving.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mapsettings.o ../final/mapsettings.cpp
 
-bluetoothsetting.o: ../final/bluetoothsetting.cpp ../final/bluetoothsetting.h \
-		ui_bluetoothsetting.h \
-		../final/virtualkeyboard.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bluetoothsetting.o ../final/bluetoothsetting.cpp
+bluetoothsetting.o: bluetoothsetting.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bluetoothsetting.o bluetoothsetting.cpp
 
-virtualkeyboard.o: ../final/virtualkeyboard.cpp ../final/virtualkeyboard.h \
-		ui_virtualkeyboard.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o virtualkeyboard.o ../final/virtualkeyboard.cpp
+virtualkeyboard.o: virtualkeyboard.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o virtualkeyboard.o virtualkeyboard.cpp
 
 qrc_MyResources.o: qrc_MyResources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_MyResources.o qrc_MyResources.cpp
@@ -498,12 +477,6 @@ moc_mainmenu.o: moc_mainmenu.cpp
 
 moc_mapsettings.o: moc_mapsettings.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mapsettings.o moc_mapsettings.cpp
-
-moc_bluetoothsetting.o: moc_bluetoothsetting.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_bluetoothsetting.o moc_bluetoothsetting.cpp
-
-moc_virtualkeyboard.o: moc_virtualkeyboard.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_virtualkeyboard.o moc_virtualkeyboard.cpp
 
 ####### Install
 
