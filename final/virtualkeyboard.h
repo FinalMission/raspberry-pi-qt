@@ -41,6 +41,8 @@ private slots:
 
     void on_Backspace_clicked();
 
+    void on_DoneButton_clicked();
+
 private:
     Ui::VirtualKeyboard *ui;
 };

@@ -57,7 +57,6 @@ void MOVING::shmchk(void)
 
        KalmanPredictUpdate1D( &kalman_filter[0], pow(10, (tx_power[0] - rssi_buf[0])/20.0) );
 
-
        qDebug("BLE[0] distance : %.2f m !!", kalman_filter[0].X );
 
         //qDebug("BLE[0] distance : %.2f m !!", pow(10, (tx_power[0] - rssi_buf[0])/20.0) );
@@ -104,7 +103,6 @@ void MOVING::mouseReleaseEvent(QMouseEvent *event)
     update();
 }
 
-
 void MOVING::on_horizontalSlider_valueChanged(int value)
 {
     beforeZoom = nowZoom;
@@ -118,4 +116,3 @@ void MOVING::on_horizontalSlider_sliderMoved(int value)
     nowZoom = 50.0+1.0*value;
     ui->graphicsView->scale(nowZoom/beforeZoom, nowZoom/beforeZoom);
 }
-

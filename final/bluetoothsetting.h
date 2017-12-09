@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QGraphicsScene>
 #include <QMouseEvent>
+#include <QDebug>
 
 namespace Ui {
 class bluetoothSetting;
@@ -19,6 +20,8 @@ public:
     QGraphicsEllipseItem * ellipse0;
     QGraphicsEllipseItem * ellipse1;
     QGraphicsEllipseItem * ellipse2;
+    int chkEllipse[3];
+    int msgboxchk;
 private slots:
 
     void on_pushButton_2_clicked();

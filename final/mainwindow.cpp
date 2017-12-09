@@ -7,7 +7,9 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <errno.h>
-#include <bluetoothsetting.h>
+#include "bluetoothsetting.h"
+#include<string.h>
+
 
 Packet * packetshm;
 
@@ -52,5 +54,7 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_2_clicked()
 {
     bluetoothSetting dlg;
+    memset(dlg.chkEllipse, 0, sizeof(dlg.chkEllipse));
+    dlg.msgboxchk = 0;
     dlg.exec();
 }

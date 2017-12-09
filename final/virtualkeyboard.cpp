@@ -93,3 +93,8 @@ void VirtualKeyboard::on_Backspace_clicked()
     value[--char_count] = NULL;
     ui->TypedText->setText(value);
 }
+
+void VirtualKeyboard::on_DoneButton_clicked()
+{
+    close();
+}
