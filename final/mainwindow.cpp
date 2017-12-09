@@ -7,6 +7,8 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <errno.h>
+#include <bluetoothsetting.h>
+
 Packet * packetshm;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -44,5 +46,11 @@ void MainWindow::on_pushButton_clicked()
 {
     MOVING dlg;
     dlg.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "MOVING GUI PROTOTYPE"));
+    dlg.exec();
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    bluetoothSetting dlg;
     dlg.exec();
 }
