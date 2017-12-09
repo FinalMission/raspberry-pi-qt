@@ -7,7 +7,6 @@
 #include "trisol.h"
 #include <QTimer>
 #include <stdio.h>
-#include "shm.h"
 
 extern Packet * packetshm;
 
@@ -48,10 +47,15 @@ void MOVING::shmchk(void)
    qDebug() << "timer debugging";
    if(packetshm != NULL)
    {
-       qDebug() << "received packet addr is... " << *(int *)&packetshm[0];
-
-
+//     qDebug() << "received packet addr is... " << *(int *)&packetshm[0];
+       qDebug("received rssi value is....%d" , ((signed int)packetshm[0].rssi | 0xffffff00)  );
+       qDebug("received rssi value is....%d" , ((signed int)packetshm[1].rssi | 0xffffff00)  );
+       qDebug("received rssi value is....%d" , ((signed int)packetshm[2].rssi | 0xffffff00)  );
        //trisol(packetshm);
+       //
+       get_x_pos = 80.0 + (double)(rand()%41);
+       get_y_pos = 180.0+ (double)(rand()%41);
+       ellipse->setPos(get_x_pos,get_y_pos);
    }
 }
 

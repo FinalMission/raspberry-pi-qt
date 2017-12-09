@@ -43,6 +43,8 @@ private:
     qreal totalScaleFactor;
     double beforeZoom;
     double nowZoom;
+    double get_x_pos;
+    double get_y_pos;
 
 protected:
 //    virtual void wheelEvent(QWheelEvent* event);
