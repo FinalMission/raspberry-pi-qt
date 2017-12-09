@@ -13,15 +13,13 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = final
 TEMPLATE = app
-
-
 SOURCES += main.cpp\
-        mainwindow.cpp \
+    mainwindow.cpp \
     moving.cpp \
     trisol.c \
     kfsol.c \
     mainmenu.cpp \
-    mapsettings.cpp
+    mapsettings.cpp \
     bluetoothsetting.cpp \
     virtualkeyboard.cpp
 
@@ -40,8 +38,8 @@ FORMS    += mainwindow.ui \
     moving.ui \
     mainmenu.ui \
     mapsettings.ui \
-       bluetoothsetting.ui \
-        virtualkeyboard.ui
+    bluetoothsetting.ui \
+    virtualkeyboard.ui
 
 RESOURCES += \
     MyResources.qrc

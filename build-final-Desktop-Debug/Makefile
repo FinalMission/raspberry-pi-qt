@@ -53,10 +53,14 @@ SOURCES       = ../final/main.cpp \
 		../final/moving.cpp \
 		../final/trisol.c \
 		../final/kfsol.c \
+		../final/mainmenu.cpp \
+		../final/mapsettings.cpp \
 		../final/bluetoothsetting.cpp \
 		../final/virtualkeyboard.cpp qrc_MyResources.cpp \
 		moc_mainwindow.cpp \
 		moc_moving.cpp \
+		moc_mainmenu.cpp \
+		moc_mapsettings.cpp \
 		moc_bluetoothsetting.cpp \
 		moc_virtualkeyboard.cpp
 OBJECTS       = main.o \
@@ -64,11 +68,15 @@ OBJECTS       = main.o \
 		moving.o \
 		trisol.o \
 		kfsol.o \
+		mainmenu.o \
+		mapsettings.o \
 		bluetoothsetting.o \
 		virtualkeyboard.o \
 		qrc_MyResources.o \
 		moc_mainwindow.o \
 		moc_moving.o \
+		moc_mainmenu.o \
+		moc_mapsettings.o \
 		moc_bluetoothsetting.o \
 		moc_virtualkeyboard.o
 DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
@@ -142,12 +150,16 @@ DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		../final/shm.h \
 		../final/trisol.h \
 		../final/kfsol.h \
+		../final/mainmenu.h \
+		../final/mapsettings.h \
 		../final/bluetoothsetting.h \
 		../final/virtualkeyboard.h ../final/main.cpp \
 		../final/mainwindow.cpp \
 		../final/moving.cpp \
 		../final/trisol.c \
 		../final/kfsol.c \
+		../final/mainmenu.cpp \
+		../final/mapsettings.cpp \
 		../final/bluetoothsetting.cpp \
 		../final/virtualkeyboard.cpp
 QMAKE_TARGET  = final
@@ -158,7 +170,7 @@ TARGET        = final
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h ui_moving.h ui_bluetoothsetting.h ui_virtualkeyboard.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_moving.h ui_mainmenu.h ui_mapsettings.h ui_bluetoothsetting.h ui_virtualkeyboard.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../final/final.pro /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++/qmake.conf /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
@@ -317,9 +329,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../final/MyResources.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../final/mainwindow.h ../final/moving.h ../final/kfsol.h ../final/shm.h ../final/trisol.h ../final/kfsol.h ../final/bluetoothsetting.h ../final/virtualkeyboard.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../final/main.cpp ../final/mainwindow.cpp ../final/moving.cpp ../final/trisol.c ../final/kfsol.c ../final/bluetoothsetting.cpp ../final/virtualkeyboard.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../final/mainwindow.ui ../final/moving.ui ../final/bluetoothsetting.ui ../final/virtualkeyboard.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../final/mainwindow.h ../final/moving.h ../final/kfsol.h ../final/shm.h ../final/trisol.h ../final/kfsol.h ../final/mainmenu.h ../final/mapsettings.h ../final/bluetoothsetting.h ../final/virtualkeyboard.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../final/main.cpp ../final/mainwindow.cpp ../final/moving.cpp ../final/trisol.c ../final/kfsol.c ../final/mainmenu.cpp ../final/mapsettings.cpp ../final/bluetoothsetting.cpp ../final/virtualkeyboard.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../final/mainwindow.ui ../final/moving.ui ../final/mainmenu.ui ../final/mapsettings.ui ../final/bluetoothsetting.ui ../final/virtualkeyboard.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -349,13 +361,14 @@ compiler_rcc_clean:
 qrc_MyResources.cpp: ../final/MyResources.qrc \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/rcc \
 		../final/img/9thfloor.png \
+		../final/img/flashscreen.png \
 		../final/img/9thfloor2.png \
 		../final/img/17thfloor.png
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/rcc -name MyResources ../final/MyResources.qrc -o qrc_MyResources.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_moving.cpp moc_bluetoothsetting.cpp moc_virtualkeyboard.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_moving.cpp moc_mainmenu.cpp moc_mapsettings.cpp moc_bluetoothsetting.cpp moc_virtualkeyboard.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_moving.cpp moc_bluetoothsetting.cpp moc_virtualkeyboard.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_moving.cpp moc_mainmenu.cpp moc_mapsettings.cpp moc_bluetoothsetting.cpp moc_virtualkeyboard.cpp
 moc_mainwindow.cpp: ../final/mainwindow.h \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/moc
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/mainwindow.h -o moc_mainwindow.cpp
@@ -364,6 +377,14 @@ moc_moving.cpp: ../final/kfsol.h \
 		../final/moving.h \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/moc
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/moving.h -o moc_moving.cpp
+
+moc_mainmenu.cpp: ../final/mainmenu.h \
+		/usr/lib/arm-linux-gnueabihf/qt5/bin/moc
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/mainmenu.h -o moc_mainmenu.cpp
+
+moc_mapsettings.cpp: ../final/mapsettings.h \
+		/usr/lib/arm-linux-gnueabihf/qt5/bin/moc
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/mapsettings.h -o moc_mapsettings.cpp
 
 moc_bluetoothsetting.cpp: ../final/bluetoothsetting.h \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/moc
@@ -375,9 +396,9 @@ moc_virtualkeyboard.cpp: ../final/virtualkeyboard.h \
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_moving.h ui_bluetoothsetting.h ui_virtualkeyboard.h
+compiler_uic_make_all: ui_mainwindow.h ui_moving.h ui_mainmenu.h ui_mapsettings.h ui_bluetoothsetting.h ui_virtualkeyboard.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_moving.h ui_bluetoothsetting.h ui_virtualkeyboard.h
+	-$(DEL_FILE) ui_mainwindow.h ui_moving.h ui_mainmenu.h ui_mapsettings.h ui_bluetoothsetting.h ui_virtualkeyboard.h
 ui_mainwindow.h: ../final/mainwindow.ui \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/uic
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/uic ../final/mainwindow.ui -o ui_mainwindow.h
@@ -385,6 +406,14 @@ ui_mainwindow.h: ../final/mainwindow.ui \
 ui_moving.h: ../final/moving.ui \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/uic
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/uic ../final/moving.ui -o ui_moving.h
+
+ui_mainmenu.h: ../final/mainmenu.ui \
+		/usr/lib/arm-linux-gnueabihf/qt5/bin/uic
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/uic ../final/mainmenu.ui -o ui_mainmenu.h
+
+ui_mapsettings.h: ../final/mapsettings.ui \
+		/usr/lib/arm-linux-gnueabihf/qt5/bin/uic
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/uic ../final/mapsettings.ui -o ui_mapsettings.h
 
 ui_bluetoothsetting.h: ../final/bluetoothsetting.ui \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/uic
@@ -414,6 +443,7 @@ mainwindow.o: ../final/mainwindow.cpp ../final/mainwindow.h \
 		../final/kfsol.h \
 		ui_moving.h \
 		../final/shm.h \
+		../final/mainmenu.h \
 		../final/bluetoothsetting.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../final/mainwindow.cpp
 
@@ -429,6 +459,21 @@ trisol.o: ../final/trisol.c ../final/trisol.h
 
 kfsol.o: ../final/kfsol.c ../final/kfsol.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o kfsol.o ../final/kfsol.c
+
+mainmenu.o: ../final/mainmenu.cpp ../final/mainmenu.h \
+		ui_mainmenu.h \
+		../final/moving.h \
+		../final/kfsol.h \
+		../final/mapsettings.h \
+		../final/bluetoothsetting.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainmenu.o ../final/mainmenu.cpp
+
+mapsettings.o: ../final/mapsettings.cpp ../final/mapsettings.h \
+		ui_mapsettings.h \
+		../final/moving.h \
+		../final/kfsol.h \
+		ui_moving.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mapsettings.o ../final/mapsettings.cpp
 
 bluetoothsetting.o: ../final/bluetoothsetting.cpp ../final/bluetoothsetting.h \
 		ui_bluetoothsetting.h \
@@ -447,6 +492,12 @@ moc_mainwindow.o: moc_mainwindow.cpp
 
 moc_moving.o: moc_moving.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_moving.o moc_moving.cpp
+
+moc_mainmenu.o: moc_mainmenu.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainmenu.o moc_mainmenu.cpp
+
+moc_mapsettings.o: moc_mapsettings.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mapsettings.o moc_mapsettings.cpp
 
 moc_bluetoothsetting.o: moc_bluetoothsetting.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_bluetoothsetting.o moc_bluetoothsetting.cpp

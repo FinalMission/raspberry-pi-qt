@@ -76,6 +76,8 @@ DeviceDiscoveryDialog::DeviceDiscoveryDialog(QWidget *parent)
      *
      **/
 
+    qDebug() << "hello RaspberryPi3";
+
     discoveryAgent = new QBluetoothDeviceDiscoveryAgent();
 
     connect(ui->inquiryType, SIGNAL(toggled(bool)), this, SLOT(setGeneralUnlimited(bool)));
@@ -107,6 +109,7 @@ DeviceDiscoveryDialog::~DeviceDiscoveryDialog()
 
 void DeviceDiscoveryDialog::addDevice(const QBluetoothDeviceInfo &info)
 {
+    qDebug() << "last rssi:" << info.rssi();
     QString label = QString("%1 %2 %3").arg(info.address().toString()).arg(info.name()).arg(info.rssi());
     QList<QListWidgetItem *> items = ui->list->findItems(label, Qt::MatchExactly);
     if (items.empty()) {

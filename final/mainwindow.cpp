@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     packetshm = (Packet *)shmat(id_shm, (void *)0, 0);
     if(packetshm == (Packet *)ERROR)
     {
-   //     printf("error: %s (%d)\n", strerror(errno), __LINE__);
+        printf("attach shared memory error: %s (%d)\n", strerror(errno), __LINE__);
         //return EXIT_FAILURE;
     }
 
@@ -36,12 +36,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->show();
     ui->setupUi(this);
 
-    flashScreen();
+    QTimer::singleShot(5000, this, SLOT(flashScreen()));
 }
 
 void MainWindow::flashScreen(void)
 {
-     sleep(3);
     MainMenu dlg;
     //dlg.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "MOVING GUI PROTOTYPE"));
     dlg.setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
@@ -53,7 +52,7 @@ MainWindow::~MainWindow()
     ret = shmdt(packetshm);
     if(ret == ERROR)
     {
-        //printf("error: %s (%d)\n", strerror(errno), __LINE__);
+        printf("detach shared memory error: %s (%d)\n", strerror(errno), __LINE__);
         //return EXIT_FAILURE;
     }
     delete ui;
@@ -74,3 +73,8 @@ void MainWindow::on_pushButton_2_clicked()
     dlg.msgboxchk = 0;
     dlg.exec();
 }
+
+void MainWindow::on_pushButton_2_clicked()
+{
+
+}*/
