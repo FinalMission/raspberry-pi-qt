@@ -37,6 +37,8 @@ private slots:
 private:
     Ui::bluetoothSetting *ui;
     QGraphicsScene scene;
+    char ValueCharString[256];
+
 protected:
     void mousePressEvent(QMouseEvent *event);
 

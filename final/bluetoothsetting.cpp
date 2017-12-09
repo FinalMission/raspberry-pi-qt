@@ -6,13 +6,15 @@
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <stdlib.h>
+#include <string.h>
 #include <QDebug>
+extern QString selectedMapPath;
 
 bluetoothSetting::bluetoothSetting(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::bluetoothSetting)
 {
-    QPixmap pix(":/img/9thfloor.png");
+    QPixmap pix(selectedMapPath);
     scene.addPixmap(pix);
     ui->setupUi(this);
     ui->graphicsView->setScene(&scene);
@@ -21,6 +23,9 @@ bluetoothSetting::bluetoothSetting(QWidget *parent) :
 
 bluetoothSetting::~bluetoothSetting()
 {
+    qDebug()<<"bluetoothsetting: " << ValueCharString;
+    memset(ValueCharString, NULL, sizeof(ValueCharString));
+    qDebug()<<"bluetoothsetting: " << ValueCharString;
     delete ui;
 }
 
@@ -34,6 +39,7 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
         return;
     }
     qDebug("run. (%d,%d)", mx, my);
+
     if(ui->PiZeroW->isChecked())
     {
         if(chkEllipse[0] == 0)
@@ -99,15 +105,15 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
 
 void bluetoothSetting::on_pushButton_2_clicked()
 {
-    char ValueCharString[256];
     VirtualKeyboard dlg;
  //   dlg.setGeometry(300, 300, 400, 400);
+    qDebug()<<"bluetoothsetting: " << ValueCharString;
     if(ui->PiZeroW->isChecked())
     {
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
-//        value = PiZero_X_value;
+//      PiZero_X_value = value;
         printf("%f\n", value);
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
@@ -118,7 +124,7 @@ void bluetoothSetting::on_pushButton_2_clicked()
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
- //       value = PiOneCaseO_X_value;
+ //     PiOneCaseO_X_value = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
         msgBox.exec();
@@ -128,7 +134,7 @@ void bluetoothSetting::on_pushButton_2_clicked()
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
- //       value = PiOneCaseX_X_value;
+ //     PiOneCaseX_X_value = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
         msgBox.exec();
@@ -139,6 +145,7 @@ void bluetoothSetting::on_pushButton_2_clicked()
         msgBox.setText("Opps!! You need to select a device. Try again.");
         msgBox.exec();
     }
+    qDebug()<<"bluetoothsetting: " << ValueCharString;
 }
 
 void bluetoothSetting::on_pushButton_clicked()

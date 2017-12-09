@@ -13,29 +13,84 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_mapsettings
 {
 public:
+    QWidget *gridLayoutWidget;
+    QGridLayout *gridLayout;
     QPushButton *pushButton;
-    QPushButton *pushButton_2;
+    QLabel *label_3;
+    QLabel *label_2;
+    QLabel *CurrentRatio;
+    QComboBox *comboBox;
+    QLabel *label;
 
     void setupUi(QDialog *mapsettings)
     {
         if (mapsettings->objectName().isEmpty())
             mapsettings->setObjectName(QStringLiteral("mapsettings"));
-        mapsettings->resize(800, 640);
-        pushButton = new QPushButton(mapsettings);
+        mapsettings->resize(454, 171);
+        gridLayoutWidget = new QWidget(mapsettings);
+        gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
+        gridLayoutWidget->setGeometry(QRect(20, 30, 421, 120));
+        gridLayout = new QGridLayout(gridLayoutWidget);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setContentsMargins(0, 0, 0, 0);
+        pushButton = new QPushButton(gridLayoutWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(350, 150, 151, 31));
-        pushButton_2 = new QPushButton(mapsettings);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(350, 200, 151, 31));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(10);
+        sizePolicy.setVerticalStretch(10);
+        sizePolicy.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
+        pushButton->setSizePolicy(sizePolicy);
+        pushButton->setMinimumSize(QSize(0, 0));
+        QIcon icon(QIcon::fromTheme(QStringLiteral("setting")));
+        pushButton->setIcon(icon);
+
+        gridLayout->addWidget(pushButton, 1, 2, 1, 1);
+
+        label_3 = new QLabel(gridLayoutWidget);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        gridLayout->addWidget(label_3, 2, 0, 1, 1);
+
+        label_2 = new QLabel(gridLayoutWidget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        gridLayout->addWidget(label_2, 1, 0, 1, 1);
+
+        CurrentRatio = new QLabel(gridLayoutWidget);
+        CurrentRatio->setObjectName(QStringLiteral("CurrentRatio"));
+
+        gridLayout->addWidget(CurrentRatio, 1, 1, 1, 1);
+
+        comboBox = new QComboBox(gridLayoutWidget);
+        comboBox->setObjectName(QStringLiteral("comboBox"));
+
+        gridLayout->addWidget(comboBox, 2, 1, 1, 1);
+
+        label = new QLabel(gridLayoutWidget);
+        label->setObjectName(QStringLiteral("label"));
+        QSizePolicy sizePolicy1(QSizePolicy::Ignored, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy1);
+
+        gridLayout->addWidget(label, 0, 0, 1, 1);
+
+        gridLayoutWidget->raise();
+        label->raise();
 
         retranslateUi(mapsettings);
 
@@ -45,8 +100,16 @@ public:
     void retranslateUi(QDialog *mapsettings)
     {
         mapsettings->setWindowTitle(QApplication::translate("mapsettings", "Dialog", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("mapsettings", "Changeratio", Q_NULLPTR));
-        pushButton_2->setText(QApplication::translate("mapsettings", "ChangeFloor", Q_NULLPTR));
+        pushButton->setText(QString());
+        label_3->setText(QApplication::translate("mapsettings", "Selected Floor:", Q_NULLPTR));
+        label_2->setText(QApplication::translate("mapsettings", "Current Ratio:", Q_NULLPTR));
+        CurrentRatio->setText(QString());
+        comboBox->clear();
+        comboBox->insertItems(0, QStringList()
+         << QApplication::translate("mapsettings", "9", Q_NULLPTR)
+         << QApplication::translate("mapsettings", "17", Q_NULLPTR)
+        );
+        label->setText(QApplication::translate("mapsettings", "Setting", Q_NULLPTR));
     } // retranslateUi
 
 };

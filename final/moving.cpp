@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include "mapsettings.h"
 #include "ui_mapsettings.h"
-
+extern QString selectedMapPath;
 extern Packet * packetshm;
 
 MOVING::MOVING(QWidget *parent) :
@@ -22,9 +22,8 @@ MOVING::MOVING(QWidget *parent) :
 
     Pressed=false;
 
-
-   // QPixmap pix(fileName);
-   //  scene.addPixmap(pix);
+    QPixmap pix(selectedMapPath);
+    scene.addPixmap(pix);
 
 
     QBrush redBrush(Qt::red);
@@ -50,11 +49,11 @@ MOVING::MOVING(QWidget *parent) :
 
 void MOVING::shmchk(void)
 {
-   qDebug() << "timer debugging";
    if(packetshm != NULL)
    {
+
 //     qDebug() << "received packet addr is... " << *(int *)&packetshm[0];
-//       qDebug("[pi0      w]received rssi value is....%d" , ((signed int)packetshm[0].rssi | 0xffffff00)  );
+       qDebug("[pi0      w]received rssi value is....%d" , ((signed int)packetshm[0].rssi | 0xffffff00)  );
 //       qDebug("[pi1 case o]received rssi value is....%d" , ((signed int)packetshm[1].rssi | 0xffffff00)  );
 //       qDebug("[pi1 case x]received rssi value is....%d" , ((signed int)packetshm[2].rssi | 0xffffff00)  );
        //trisol(packetshm);
