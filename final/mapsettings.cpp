@@ -3,7 +3,7 @@
 #include "moving.h"
 #include "ui_moving.h"
 #include <QGraphicsScene>
-
+#include <QFileDialog>
 mapsettings::mapsettings(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::mapsettings)

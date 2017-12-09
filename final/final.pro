@@ -29,7 +29,9 @@ HEADERS  += mainwindow.h \
     trisol.h \
     kfsol.h \
     mainmenu.h \
-    mapsettings.h
+    mapsettings.h \
+    bluetoothsetting.h \
+    virtualkeyboard.h
 
 FORMS    += mainwindow.ui \
     moving.ui \
