@@ -39,7 +39,7 @@ MOVING::MOVING(QWidget *parent) :
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(shmchk()));
-    timer->start(200);
+    timer->start(1280);
 }
 
 void MOVING::shmchk(void)
@@ -48,9 +48,9 @@ void MOVING::shmchk(void)
    if(packetshm != NULL)
    {
 //     qDebug() << "received packet addr is... " << *(int *)&packetshm[0];
-       qDebug("received rssi value is....%d" , ((signed int)packetshm[0].rssi | 0xffffff00)  );
-       qDebug("received rssi value is....%d" , ((signed int)packetshm[1].rssi | 0xffffff00)  );
-       qDebug("received rssi value is....%d" , ((signed int)packetshm[2].rssi | 0xffffff00)  );
+       qDebug("[pi0      w]received rssi value is....%d" , ((signed int)packetshm[0].rssi | 0xffffff00)  );
+       qDebug("[pi1 case o]received rssi value is....%d" , ((signed int)packetshm[1].rssi | 0xffffff00)  );
+       qDebug("[pi1 case x]received rssi value is....%d" , ((signed int)packetshm[2].rssi | 0xffffff00)  );
        //trisol(packetshm);
        //
        get_x_pos = 80.0 + (double)(rand()%41);
