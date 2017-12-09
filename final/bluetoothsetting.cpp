@@ -6,6 +6,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <stdlib.h>
+#include <QDebug>
 
 bluetoothSetting::bluetoothSetting(QWidget *parent) :
     QDialog(parent),
@@ -44,7 +45,7 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
         }
         else
         {
-             ellipse0->setRect(QRectF(0, 0, 15, 15));
+            ellipse0->setRect(QRectF(0, 0, 15, 15));
             ellipse0->setPos(mx-20, my-20);
         }
     }
@@ -53,12 +54,14 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
         if(chkEllipse[1] == 0)
         {
             chkEllipse[1] = 1;
-            QBrush redBrush(Qt::blue);
+            QBrush blueBrush(Qt::blue);
             QPen blackPen(Qt::black);
-            ellipse1 = scene.addEllipse(mx-20, my-20, 20, 15, blackPen, redBrush);
+            ellipse1 = scene.addEllipse(mx-20, my-20, 15, 15, blackPen, blueBrush);
+            qDebug() << "ellipse1 "<<  ellipse1;
         }
         else
         {
+             qDebug() << "else ellipse1 "<<  ellipse1;
              ellipse1->setRect(QRectF(0, 0, 15, 15));
              ellipse1->setPos(mx-20, my-20);
         }
@@ -68,9 +71,9 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
         if(chkEllipse[2] == 0)
         {
             chkEllipse[2] = 1;
-            QBrush redBrush(Qt::green);
+            QBrush greenBrush(Qt::green);
             QPen blackPen(Qt::black);
-            ellipse2 = scene.addEllipse(mx-20, my-20, 15, 15, blackPen, redBrush);
+            ellipse2 = scene.addEllipse(mx-20, my-20, 15, 15, blackPen, greenBrush);
         }
         else
         {
@@ -87,9 +90,9 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
     }
     if(msgboxchk == 0)
     {
-        //QMessageBox msgBox;
-        //msgBox.setText("Bluetooth location setting completed.");
-        //msgBox.exec();
+        QMessageBox msgBox;
+        msgBox.setText("Bluetooth location setting completed.");
+        msgBox.exec();
     }
     msgboxchk = 0;
 }
