@@ -72,7 +72,7 @@ public:
 
 public slots:
     void addService(const QBluetoothServiceInfo&);
-
+    //void addService(const QBluetoothDeviceInfo&);
 private:
     QBluetoothServiceDiscoveryAgent *discoveryAgent;
     Ui_ServiceDiscovery *ui;

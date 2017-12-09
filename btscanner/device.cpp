@@ -107,7 +107,7 @@ DeviceDiscoveryDialog::~DeviceDiscoveryDialog()
 
 void DeviceDiscoveryDialog::addDevice(const QBluetoothDeviceInfo &info)
 {
-    QString label = QString("%1 %2").arg(info.address().toString()).arg(info.name());
+    QString label = QString("%1 %2 %3").arg(info.address().toString()).arg(info.name()).arg(info.rssi());
     QList<QListWidgetItem *> items = ui->list->findItems(label, Qt::MatchExactly);
     if (items.empty()) {
         QListWidgetItem *item = new QListWidgetItem(label);
@@ -192,6 +192,7 @@ void DeviceDiscoveryDialog::hostModeStateChanged(QBluetoothLocalDevice::HostMode
 
     ui->scan->setEnabled(on);
     ui->discoverable->setEnabled(on);
+
 }
 void DeviceDiscoveryDialog::displayPairingMenu(const QPoint &pos)
 {
@@ -231,3 +232,4 @@ void DeviceDiscoveryDialog::pairingDone(const QBluetoothAddress &address, QBluet
         }
     }
 }
+

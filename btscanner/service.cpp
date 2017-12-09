@@ -85,6 +85,8 @@ ServiceDiscoveryDialog::ServiceDiscoveryDialog(const QString &name,
 
     connect(discoveryAgent, SIGNAL(serviceDiscovered(QBluetoothServiceInfo)),
             this, SLOT(addService(QBluetoothServiceInfo)));
+//    connect(discoveryAgent, SIGNAL(serviceDiscovered(QBluetoothServiceInfo)),
+//                this, SLOT(addService(QBluetoothDeviceInfo)));
     connect(discoveryAgent, SIGNAL(finished()), ui->status, SLOT(hide()));
 
     discoveryAgent->start();
@@ -104,8 +106,8 @@ void ServiceDiscoveryDialog::addService(const QBluetoothServiceInfo &info)
     QString line = info.serviceName();
     if (!info.serviceDescription().isEmpty())
         line.append("\n\t" + info.serviceDescription());
-    if (!info.serviceProvider().isEmpty())
+    if (!info.serviceProvider().isEmpty()){
         line.append("\n\t" + info.serviceProvider());
-
+    }
     ui->list->addItem(line);
 }

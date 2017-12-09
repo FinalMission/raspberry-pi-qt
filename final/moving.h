@@ -13,6 +13,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsItem>
 
+
 namespace Ui {
 class MOVING;
 }
@@ -27,12 +28,12 @@ public:
     int mx,my;
   //  bool viewportEvent(QEvent *event);
 
+public slots:
+    void shmchk(void);
+
 private slots:
-
-
    void on_horizontalSlider_valueChanged(int value);
-
-    void on_horizontalSlider_sliderMoved(int position);
+   void on_horizontalSlider_sliderMoved(int position);
 
 private:
     Ui::MOVING *ui;
@@ -51,6 +52,7 @@ protected:
  //   void mouseGrabber();
     void mouseMoveEvent(QMouseEvent * evet);
 //    bool eventFilter(QObject *object, QEvent *event);
+
 
 };
 

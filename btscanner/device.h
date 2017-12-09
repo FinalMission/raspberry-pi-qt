@@ -88,6 +88,7 @@ private:
     QBluetoothDeviceDiscoveryAgent *discoveryAgent;
     QBluetoothLocalDevice *localDevice;
     Ui_DeviceDiscovery *ui;
+//    QBluetoothDeviceInfo * RSSI_Info;
 };
 
 #endif

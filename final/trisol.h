@@ -2,15 +2,15 @@
 #define _TRISOL_
 
 typedef struct {
-	double a, b, k;
+    double a, b, k;
 }_circle;
 
 typedef struct {
-	double a, b, k;
+    double a, b, k;
 }_line;
 
 typedef struct {
-	double x, y;
+    double x, y;
 }_dot;
 
 void _solve_line(_circle c1, _circle c2, _line * l);

@@ -6,6 +6,8 @@
 
 QT       += core gui
 QT       += widgets
+QT += bluetooth
+QT += core
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,10 +17,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    moving.cpp
+    moving.cpp \
+    trisol.c \
+    kfsol.c
 
 HEADERS  += mainwindow.h \
-    moving.h
+    moving.h \
+    shm.h \
+    trisol.h \
+    kfsol.h
 
 FORMS    += mainwindow.ui \
     moving.ui
