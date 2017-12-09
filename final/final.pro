@@ -17,20 +17,25 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-        kfsol.c \
         moving.cpp \
-        trisol.c
-
+        trisol.c \
+        kfsol.c \
+        bluetoothsetting.cpp \
+        virtualkeyboard.cpp
 
 HEADERS  += mainwindow.h \
     moving.h \
     kfsol.h \
     shm.h \
-    trisol.h
-
+    trisol.h \
+    kfsol.h \
+    bluetoothsetting.h \
+    virtualkeyboard.h
 
 FORMS    += mainwindow.ui \
-    moving.ui
+    moving.ui \
+    bluetoothsetting.ui \
+    virtualkeyboard.ui
 
 RESOURCES += \
     MyResources.qrc
