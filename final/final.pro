@@ -17,15 +17,17 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    moving.cpp \
-    trisol.c \
-    kfsol.c
+        kfsol.c \
+        moving.cpp \
+        trisol.c
+
 
 HEADERS  += mainwindow.h \
     moving.h \
+    kfsol.h \
     shm.h \
-    trisol.h \
-    kfsol.h
+    trisol.h
+
 
 FORMS    += mainwindow.ui \
     moving.ui

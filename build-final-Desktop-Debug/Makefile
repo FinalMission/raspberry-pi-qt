@@ -50,16 +50,16 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../final/main.cpp \
 		../final/mainwindow.cpp \
+		../final/kfsol.c \
 		../final/moving.cpp \
-		../final/trisol.c \
-		../final/kfsol.c qrc_MyResources.cpp \
+		../final/trisol.c qrc_MyResources.cpp \
 		moc_mainwindow.cpp \
 		moc_moving.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
+		kfsol.o \
 		moving.o \
 		trisol.o \
-		kfsol.o \
 		qrc_MyResources.o \
 		moc_mainwindow.o \
 		moc_moving.o
@@ -130,13 +130,13 @@ DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/lex.prf \
 		../final/final.pro ../final/mainwindow.h \
 		../final/moving.h \
+		../final/kfsol.h \
 		../final/shm.h \
-		../final/trisol.h \
-		../final/kfsol.h ../final/main.cpp \
+		../final/trisol.h ../final/main.cpp \
 		../final/mainwindow.cpp \
+		../final/kfsol.c \
 		../final/moving.cpp \
-		../final/trisol.c \
-		../final/kfsol.c
+		../final/trisol.c
 QMAKE_TARGET  = final
 DESTDIR       = 
 TARGET        = final
@@ -306,8 +306,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../final/MyResources.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../final/mainwindow.h ../final/moving.h ../final/shm.h ../final/trisol.h ../final/kfsol.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../final/main.cpp ../final/mainwindow.cpp ../final/moving.cpp ../final/trisol.c ../final/kfsol.c $(DISTDIR)/
+	$(COPY_FILE) --parents ../final/mainwindow.h ../final/moving.h ../final/kfsol.h ../final/shm.h ../final/trisol.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../final/main.cpp ../final/mainwindow.cpp ../final/kfsol.c ../final/moving.cpp ../final/trisol.c $(DISTDIR)/
 	$(COPY_FILE) --parents ../final/mainwindow.ui ../final/moving.ui $(DISTDIR)/
 
 
@@ -349,7 +349,8 @@ moc_mainwindow.cpp: ../final/mainwindow.h \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/moc
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtBluetooth -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/mainwindow.h -o moc_mainwindow.cpp
 
-moc_moving.cpp: ../final/moving.h \
+moc_moving.cpp: ../final/kfsol.h \
+		../final/moving.h \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/moc
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/workspace/raspberry-pi-qt/final -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtBluetooth -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../final/moving.h -o moc_moving.cpp
 
@@ -376,28 +377,29 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
-main.o: ../final/main.cpp ../final/mainwindow.h \
-		../final/shm.h
+main.o: ../final/main.cpp ../final/mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../final/main.cpp
 
 mainwindow.o: ../final/mainwindow.cpp ../final/mainwindow.h \
 		ui_mainwindow.h \
 		../final/moving.h \
-		ui_moving.h
+		../final/kfsol.h \
+		ui_moving.h \
+		../final/shm.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../final/mainwindow.cpp
 
+kfsol.o: ../final/kfsol.c ../final/kfsol.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o kfsol.o ../final/kfsol.c
+
 moving.o: ../final/moving.cpp ../final/moving.h \
+		../final/kfsol.h \
 		ui_moving.h \
 		../final/shm.h \
-		../final/kfsol.h \
 		../final/trisol.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moving.o ../final/moving.cpp
 
 trisol.o: ../final/trisol.c ../final/trisol.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o trisol.o ../final/trisol.c
-
-kfsol.o: ../final/kfsol.c ../final/kfsol.h
-	$(CC) -c $(CFLAGS) $(INCPATH) -o kfsol.o ../final/kfsol.c
 
 qrc_MyResources.o: qrc_MyResources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_MyResources.o qrc_MyResources.cpp
