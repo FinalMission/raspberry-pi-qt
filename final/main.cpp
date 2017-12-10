@@ -87,14 +87,13 @@ void _solve_position(_circle * circle, _dot * ans) {
     ans->y = (dot[0].y + dot[1].y + dot[2].y) / 3.0;
 }
 
-<<<<<<< HEAD
-double _rssi_to_dist(signed int rssi, signed int tx) {
+double _rssi_to_dist(signed int rssi, signed int tx){
     return pow( 10,( (tx-rssi)/20.0) );
-=======
+}
+
 double _rssi_to_dist(double rssi) {
     //return 10.0;
     return pow( 10.0,( (-59.0-rssi)/20.0) );
->>>>>>> 432c95e22b5dd027f2f851b2c1c7a28efff64651
 }
 
 /* ############## sample codes of trisol. ###################

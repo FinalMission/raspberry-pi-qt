@@ -34,17 +34,31 @@ public:
         MainMenu->resize(800, 480);
         mapButton = new QPushButton(MainMenu);
         mapButton->setObjectName(QStringLiteral("mapButton"));
-        mapButton->setGeometry(QRect(270, 110, 271, 251));
+        mapButton->setGeometry(QRect(266, 0, 271, 481));
         mapButton->setStyleSheet(QLatin1String("#mapButton\n"
 "{\n"
-"	background-image: url(:/img/mapIcon.png);\n"
+"	background-image: url(:/img/mapIcon3.png);\n"
+"	background-color: yellow;\n"
+"	border: none;\n"
 "}"));
         BLEButton = new QPushButton(MainMenu);
         BLEButton->setObjectName(QStringLiteral("BLEButton"));
-        BLEButton->setGeometry(QRect(-4, 0, 271, 481));
+        BLEButton->setGeometry(QRect(-3, 0, 271, 481));
+        BLEButton->setStyleSheet(QLatin1String("#BLEButton\n"
+"{\n"
+"	background-image: url(:/img/bluetoothsettingIcon3.png);\n"
+"	background-color: yellow;\n"
+"	border: none;\n"
+"}"));
         mapsetButton = new QPushButton(MainMenu);
         mapsetButton->setObjectName(QStringLiteral("mapsetButton"));
-        mapsetButton->setGeometry(QRect(535, 0, 266, 481));
+        mapsetButton->setGeometry(QRect(536, 0, 266, 481));
+        mapsetButton->setStyleSheet(QLatin1String("#mapsetButton\n"
+"{\n"
+"	background-image: url(:/img/mapsettingIcon3.png);\n"
+"	background-color: yellow;\n"
+"	border: none;\n"
+"}"));
         pushButton = new QPushButton(MainMenu);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(770, 0, 31, 31));
@@ -57,9 +71,9 @@ public:
     void retranslateUi(QDialog *MainMenu)
     {
         MainMenu->setWindowTitle(QApplication::translate("MainMenu", "Dialog", Q_NULLPTR));
-        mapButton->setText(QApplication::translate("MainMenu", "map", Q_NULLPTR));
-        BLEButton->setText(QApplication::translate("MainMenu", "bluetooth setting", Q_NULLPTR));
-        mapsetButton->setText(QApplication::translate("MainMenu", "mapsetting", Q_NULLPTR));
+        mapButton->setText(QString());
+        BLEButton->setText(QString());
+        mapsetButton->setText(QString());
         pushButton->setText(QApplication::translate("MainMenu", "X", Q_NULLPTR));
     } // retranslateUi
 

@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     mainmenu.cpp \
     mapsettings.cpp \
     bluetoothsetting.cpp \
-    virtualkeyboard.cpp
+    virtualkeyboard.cpp \
+    roughnavi.c
 
 HEADERS  += mainwindow.h \
     moving.h \

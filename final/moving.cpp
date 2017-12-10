@@ -28,6 +28,7 @@ extern void _solve_dot(_line l1, _line l2, _dot * d);
 extern void _solve_position(_circle * circle, _dot * ans);
 extern void _solve_position(_circle * circle, _dot * ans);
 extern double _rssi_to_dist(signed int rssi, signed int tx);
+extern double _rssi_to_dist(double rssi);
 
 
 MOVING::MOVING(QWidget *parent) :

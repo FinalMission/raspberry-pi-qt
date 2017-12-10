@@ -40,7 +40,7 @@ public:
     {
         if (mapsettings->objectName().isEmpty())
             mapsettings->setObjectName(QStringLiteral("mapsettings"));
-        mapsettings->resize(436, 233);
+        mapsettings->resize(317, 198);
         gridLayoutWidget = new QWidget(mapsettings);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
         gridLayoutWidget->setGeometry(QRect(20, 30, 271, 120));
@@ -94,7 +94,7 @@ public:
         if (QIcon::hasThemeIcon(iconThemeName)) {
             icon = QIcon::fromTheme(iconThemeName);
         } else {
-            icon.addFile(QStringLiteral("."), QSize(), QIcon::Normal, QIcon::Off);
+            icon.addFile(QStringLiteral(""), QSize(), QIcon::Normal, QIcon::Off);
         }
         SettingButton->setIcon(icon);
 
