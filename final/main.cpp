@@ -14,16 +14,15 @@ QString selectedMapPath = ":/img/9thfloor.png";
 
 _circle c[3];
 _dot predicted_dot;
-SKalman1D kalman_filter[3] = {{10,10,10,100},{10,10,10,100},{10,10,10,100}};
+SKalman1D kalman_filter[3] = {{1,10,10,60},{1,10,10,60},{1,10,10,60}};
 signed int device_x_pos[3] = {100,100,100};
 signed int device_y_pos[3] = {100,100,100};
-signed int tx_power[3] = {-59, -59, -59};
-double cm_per_pixel = 5.80303;
+signed int tx_power[3] = {-54, -54, -59};
+double cm_per_pixel = 5.8030;
 
 //double PiZero_X_value;
 //double PiOneCaseO_X_value;
 //double PiOneCaseX_X_value;
-
 
 void KalmanPredictUpdate1D(SKalman1D *kalman, double NewData);
 void _solve_line(_circle c1, _circle c2, _line * l);
@@ -91,7 +90,7 @@ void _solve_position(_circle * circle, _dot * ans) {
 }
 
 double _rssi_to_dist(signed int rssi, signed int tx) {
-    return pow( 10,((rssi-tx)/20.0) );
+    return pow( 10,( (tx-rssi)/20.0) );
 }
 
 /* ############## sample codes of trisol. ###################

@@ -172,7 +172,7 @@ void bluetoothSetting::on_pushButton_2_clicked()
     {
         QMessageBox msgBox;
         msgBox.setText("Opps!! You need to select a device. Try again.");
-        msgBox.exec();
+ //       msgBox.exec();
     }
     qDebug()<<"bluetoothsetting: " << ValueCharString;
 }

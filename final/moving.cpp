@@ -21,6 +21,7 @@ extern double cm_per_pixel;
 extern QString selectedMapPath;
 extern Packet * packetshm;
 
+
 extern void KalmanPredictUpdate1D(SKalman1D *kalman, double NewData);
 extern void _solve_line(_circle c1, _circle c2, _line * l);
 extern void _solve_dot(_line l1, _line l2, _dot * d);
@@ -45,7 +46,7 @@ MOVING::MOVING(QWidget *parent) :
 
     QBrush redBrush(Qt::red);
     QPen blackPen(Qt::black);
-    ellipse = scene.addEllipse(180, 100, 15, 15, blackPen, redBrush);
+    ellipse = scene.addEllipse(0, 0, 15, 15, blackPen, redBrush);
     ui->graphicsView->setScene(&scene);
     ui->graphicsView->show();
 //   ellipse->setPos(200,200);
@@ -69,13 +70,20 @@ void MOVING::shmchk(void)
    if(packetshm != NULL)
    {
 
-       //qDebug("[pi0 w] received rssi value is....%d" , ((signed int)packetshm[0].rssi | 0xffffff00)  );
-       //qDebug("[pi1 o] received rssi value is....%d" , ((signed int)packetshm[1].rssi | 0xffffff00)  );
-       //qDebug("[pi1 x] received rssi value is....%d" , ((signed int)packetshm[2].rssi | 0xffffff00)  );
+       qDebug("[pi0 w] received rssi value is....%d" , ((signed int)packetshm[0].rssi | 0xffffff00)  );
+       qDebug("[pi1 o] received rssi value is....%d" , ((signed int)packetshm[1].rssi | 0xffffff00)  );
+       qDebug("[pi1 x] received rssi value is....%d" , ((signed int)packetshm[2].rssi | 0xffffff00)  );
 
-       qDebug("dist 0 = %f", _rssi_to_dist(((signed int)packetshm[0].rssi | 0xffffff00), tx_power[0]) );
-       qDebug("dist 1 = %f", _rssi_to_dist(((signed int)packetshm[1].rssi | 0xffffff00), tx_power[1]) );
-       qDebug("dist 2 = %f", _rssi_to_dist(((signed int)packetshm[2].rssi | 0xffffff00), tx_power[2]) );
+
+       KalmanPredictUpdate1D(&kalman_filter[0], _rssi_to_dist(((signed int)packetshm[0].rssi | 0xffffff00), -54));
+       KalmanPredictUpdate1D(&kalman_filter[1], _rssi_to_dist(((signed int)packetshm[1].rssi | 0xffffff00), -54));
+       KalmanPredictUpdate1D(&kalman_filter[2], _rssi_to_dist(((signed int)packetshm[2].rssi | 0xffffff00), -59));
+
+       qDebug("dist 0 = %f",  kalman_filter[0].X);
+       qDebug("dist 0 = %f",  kalman_filter[1].X);
+       qDebug("dist 0 = %f",  kalman_filter[2].X);
+
+
 
        c[0].a = device_x_pos[0]*cm_per_pixel/100.0;
        c[1].a = device_x_pos[1]*cm_per_pixel/100.0;
@@ -85,18 +93,21 @@ void MOVING::shmchk(void)
        c[1].b = device_y_pos[1]*cm_per_pixel/100.0;
        c[2].b = device_y_pos[2]*cm_per_pixel/100.0;
 
-       c[0].k = _rssi_to_dist(((signed int)packetshm[0].rssi | 0xffffff00), tx_power[0]);
-       c[1].k = _rssi_to_dist(((signed int)packetshm[1].rssi | 0xffffff00), tx_power[1]);
-       c[2].k = _rssi_to_dist(((signed int)packetshm[2].rssi | 0xffffff00), tx_power[2]);
+       //qDebug("(%.2f,%.2f), (%.2f,%.2f), (%.2f,%.2f) ",
+       //       c[0].a, c[0].b, c[1].a, c[1].b, c[2].a, c[2].b);
+
+       c[0].k = kalman_filter[0].X;
+       c[1].k = kalman_filter[1].X;
+       c[2].k = kalman_filter[2].X;
 
        _solve_position(c, &predicted_dot);
 
        predicted_dot.x = predicted_dot.x*100/cm_per_pixel;
        predicted_dot.y = predicted_dot.y*100/cm_per_pixel;
 
-       qDebug("now position is ... x = %.2f\ny = %.2f", predicted_dot.x, predicted_dot.y);
-
-       ellipse->setPos((unsigned int)predicted_dot.x,(unsigned int)predicted_dot.y);
+       qDebug("now new position is ... x = %d  y = %d", (signed int)predicted_dot.x, (signed int)predicted_dot.y);
+//       ellipse1->setRect(QRectF(0, 0, 15, 15));
+       ellipse->setPos((signed int)predicted_dot.x,(signed int)predicted_dot.y);
    }
 }
 
