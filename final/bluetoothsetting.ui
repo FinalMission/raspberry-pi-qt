@@ -29,60 +29,72 @@
      <x>6</x>
      <y>380</y>
      <width>91</width>
-     <height>121</height>
+     <height>122</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="label">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>1</horstretch>
-        <verstretch>3</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
        <string>Selector</string>
       </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QRadioButton" name="PiZeroW">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-        <horstretch>1</horstretch>
-        <verstretch>1</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>BLE 0</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QRadioButton" name="PiOneCaseO">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-        <horstretch>1</horstretch>
-        <verstretch>1</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>BLE 1</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QRadioButton" name="PiOneCaseX">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-        <horstretch>1</horstretch>
-        <verstretch>1</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>BLE 2</string>
-      </property>
+      <widget class="QRadioButton" name="PiOneCaseX">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>70</y>
+         <width>89</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>1</horstretch>
+         <verstretch>1</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>BLE 2</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="PiZeroW">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>24</y>
+         <width>89</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>1</horstretch>
+         <verstretch>1</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>BLE 0</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="PiOneCaseO">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>47</y>
+         <width>89</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>1</horstretch>
+         <verstretch>1</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>BLE 1</string>
+       </property>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -90,185 +102,36 @@
   <widget class="QWidget" name="gridLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>216</x>
      <y>380</y>
-     <width>551</width>
+     <width>561</width>
      <height>121</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_3">
-    <item row="3" column="4">
-     <widget class="QLabel" name="two_t">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="5">
-     <widget class="QLabel" name="zero_p">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="2">
-     <widget class="QLabel" name="zero_y">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="7">
-     <widget class="QLabel" name="zero_r">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="label_16">
-      <property name="text">
-       <string>2</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_15">
-      <property name="text">
-       <string>1</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="6">
-     <widget class="QLabel" name="label_27">
-      <property name="text">
-       <string>Q</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="6">
-     <widget class="QLabel" name="zero_q">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_14">
-      <property name="text">
-       <string>0</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_13">
-      <property name="text">
-       <string>Device</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="3">
-     <widget class="QLabel" name="zero_d">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="label_12">
-      <property name="text">
-       <string>X</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLabel" name="two_x">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="3">
-     <widget class="QLabel" name="one_d">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="5">
-     <widget class="QLabel" name="label_23">
-      <property name="text">
-       <string>P</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="2">
-     <widget class="QLabel" name="one_y">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="2">
-     <widget class="QLabel" name="two_y">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="2">
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="Y_Label">
+      <property name="maximumSize">
+       <size>
+        <width>70</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <property name="text">
        <string>Y</string>
       </property>
      </widget>
     </item>
     <item row="0" column="4">
-     <widget class="QLabel" name="label_19">
+     <widget class="QLabel" name="T_Label">
+      <property name="maximumSize">
+       <size>
+        <width>70</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <property name="text">
        <string>T</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="4">
-     <widget class="QLabel" name="one_t">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLabel" name="one_x">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="6">
-     <widget class="QLabel" name="two_q">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="6">
-     <widget class="QLabel" name="one_q">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="5">
-     <widget class="QLabel" name="two_p">
-      <property name="text">
-       <string>NULL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="7">
-     <widget class="QLabel" name="label_31">
-      <property name="text">
-       <string>R</string>
       </property>
      </widget>
     </item>
@@ -293,6 +156,19 @@
       </property>
      </widget>
     </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="label_16">
+      <property name="maximumSize">
+       <size>
+        <width>50</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>BLE 2</string>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="1">
      <widget class="QLabel" name="zero_x">
       <property name="text">
@@ -307,6 +183,107 @@
       </property>
      </widget>
     </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_14">
+      <property name="maximumSize">
+       <size>
+        <width>50</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>BLE 0</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QLabel" name="zero_y">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="7">
+     <widget class="QLabel" name="zero_r">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="5">
+     <widget class="QLabel" name="zero_p">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="4">
+     <widget class="QLabel" name="one_t">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLabel" name="one_x">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="6">
+     <widget class="QLabel" name="Q_Label">
+      <property name="maximumSize">
+       <size>
+        <width>70</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Q</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="6">
+     <widget class="QLabel" name="zero_q">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_15">
+      <property name="maximumSize">
+       <size>
+        <width>50</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>BLE 1</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="5">
+     <widget class="QLabel" name="two_p">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="7">
+     <widget class="QLabel" name="R_Label">
+      <property name="maximumSize">
+       <size>
+        <width>70</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </widget>
+    </item>
     <item row="3" column="7">
      <widget class="QLabel" name="two_r">
       <property name="text">
@@ -315,9 +292,110 @@
      </widget>
     </item>
     <item row="0" column="3">
-     <widget class="QLabel" name="label_10">
+     <widget class="QLabel" name="D_Label">
+      <property name="maximumSize">
+       <size>
+        <width>70</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <property name="text">
        <string>D</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLabel" name="two_x">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="Device_Label">
+      <property name="maximumSize">
+       <size>
+        <width>60</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Device</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="3">
+     <widget class="QLabel" name="zero_d">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="4">
+     <widget class="QLabel" name="two_t">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="6">
+     <widget class="QLabel" name="two_q">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="6">
+     <widget class="QLabel" name="one_q">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QLabel" name="one_y">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2">
+     <widget class="QLabel" name="two_y">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="3">
+     <widget class="QLabel" name="one_d">
+      <property name="text">
+       <string>NULL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="5">
+     <widget class="QLabel" name="P_Label">
+      <property name="maximumSize">
+       <size>
+        <width>70</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>P</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="X_Label">
+      <property name="maximumSize">
+       <size>
+        <width>70</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>X</string>
       </property>
      </widget>
     </item>
@@ -326,9 +404,9 @@
   <widget class="QWidget" name="gridLayoutWidget_3">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>101</x>
      <y>380</y>
-     <width>101</width>
+     <width>111</width>
      <height>121</height>
     </rect>
    </property>
@@ -407,19 +485,12 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>Exit</string>
+       <string>Appy</string>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <zorder>graphicsView</zorder>
-  <zorder>verticalLayoutWidget</zorder>
-  <zorder>pushButton_2</zorder>
-  <zorder>pushButton_6</zorder>
-  <zorder>gridLayoutWidget_2</zorder>
-  <zorder>gridLayoutWidget_3</zorder>
-  <zorder>label_10</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -25,7 +25,7 @@ mapsettings::mapsettings(QWidget *parent) :
         }
     }
     ui->CurrentRatio->setText(QString::number(cm_per_pixel));
-    ui->label->setStyleSheet("font-weight: bold;");
+    ui->groupBox->setStyleSheet("font-weight: bold;");
 }
 
 mapsettings::~mapsettings()

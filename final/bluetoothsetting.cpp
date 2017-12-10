@@ -21,11 +21,22 @@ bluetoothSetting::bluetoothSetting(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::bluetoothSetting)
 {
+    ui->setupUi(this);
     QPixmap pix(selectedMapPath);
     scene.addPixmap(pix);
-    ui->setupUi(this);
     ui->graphicsView->setScene(&scene);
     ui->graphicsView->show();
+    ui->groupBox->setStyleSheet("font-weight: bold;");
+    ui->Device_Label->setStyleSheet("font-weight: bold;");
+    ui->X_Label->setStyleSheet("font-weight: bold;");
+    ui->Y_Label->setStyleSheet("font-weight: bold;");
+    ui->D_Label->setStyleSheet("font-weight: bold;");
+    ui->T_Label->setStyleSheet("font-weight: bold;");
+    ui->P_Label->setStyleSheet("font-weight: bold;");
+    ui->Q_Label->setStyleSheet("font-weight: bold;");
+    ui->R_Label->setStyleSheet("font-weight: bold;");
+    memset(chkEllipse, 0, sizeof(chkEllipse));
+    msgboxchk = 0;
 }
 
 bluetoothSetting::~bluetoothSetting()
@@ -49,17 +60,22 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
 
     if(ui->PiZeroW->isChecked())
     {
+        qDebug("val : %d", chkEllipse[0]);
+
         if(chkEllipse[0] == 0)
         {
             chkEllipse[0] = 1;
             QBrush redBrush(Qt::red);
             QPen blackPen(Qt::black);
+            qDebug() << "before ellipse0";
             ellipse0 = scene.addEllipse(mx-15, my-15, 15, 15, blackPen, redBrush);
+            qDebug() << "after ellipse0" << ellipse0;
             ui->zero_x->setText(QString::number(mx));
             ui->zero_y->setText(QString::number(my));
         }
         else
         {
+            qDebug() << "else";
             ellipse0->setRect(QRectF(0, 0, 15, 15));
             ellipse0->setPos(mx-15, my-15);
             ui->zero_x->setText(QString::number(mx));
@@ -116,7 +132,7 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
     {
         QMessageBox msgBox;
         msgBox.setText("Opps!! You need to select a device. Try again.");
-//        msgBox.exec();
+        msgBox.exec();
         msgboxchk = 1;
     }
     if(msgboxchk == 0)
@@ -142,7 +158,7 @@ void bluetoothSetting::on_pushButton_2_clicked()
         kalman_filter[0].X = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-//        msgBox.exec();
+ //       msgBox.exec();
         ui->zero_d->setText(QString::number(value));
     }
     else if(ui->PiOneCaseO->isChecked())
@@ -153,7 +169,7 @@ void bluetoothSetting::on_pushButton_2_clicked()
         kalman_filter[1].X = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-//        msgBox.exec();
+ //       msgBox.exec();
         ui->one_d->setText(QString::number(value));
     }
     else if(ui->PiOneCaseX->isChecked())
@@ -164,14 +180,14 @@ void bluetoothSetting::on_pushButton_2_clicked()
         kalman_filter[2].X = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-  //      msgBox.exec();
+ //       msgBox.exec();
         ui->two_d->setText(QString::number(value));
     }
     else
     {
         QMessageBox msgBox;
         msgBox.setText("Opps!! You need to select a device. Try again.");
- //       msgBox.exec();
+        msgBox.exec();
     }
     qDebug()<<"bluetoothsetting: " << ValueCharString;
 }
@@ -189,7 +205,7 @@ void bluetoothSetting::on_pushButton_clicked()
         kalman_filter[0].Q = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-        msgBox.exec();
+ //       msgBox.exec();
         ui->zero_q->setText(QString::number(value));
     }
     else if(ui->PiOneCaseO->isChecked())
@@ -200,7 +216,7 @@ void bluetoothSetting::on_pushButton_clicked()
          kalman_filter[1].Q = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-        msgBox.exec();
+ //       msgBox.exec();
         ui->one_q->setText(QString::number(value));
 
     }
@@ -212,7 +228,7 @@ void bluetoothSetting::on_pushButton_clicked()
         kalman_filter[2].Q = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-        msgBox.exec();
+  //      msgBox.exec();
         ui->two_q->setText(QString::number(value));
 
     }
@@ -237,7 +253,7 @@ void bluetoothSetting::on_pushButton_3_clicked()
         kalman_filter[0].P = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-        msgBox.exec();
+  //      msgBox.exec();
         ui->zero_p->setText(QString::number(value));
     }
     else if(ui->PiOneCaseO->isChecked())
@@ -248,7 +264,7 @@ void bluetoothSetting::on_pushButton_3_clicked()
         kalman_filter[1].P = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-        msgBox.exec();
+ //       msgBox.exec();
         ui->one_p->setText(QString::number(value));
 
     }
@@ -260,7 +276,7 @@ void bluetoothSetting::on_pushButton_3_clicked()
         kalman_filter[2].P = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-        msgBox.exec();
+ //       msgBox.exec();
         ui->two_p->setText(QString::number(value));
     }
     else
@@ -285,7 +301,7 @@ void bluetoothSetting::on_pushButton_4_clicked()
         kalman_filter[0].R = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-        msgBox.exec();
+//        msgBox.exec();
         ui->zero_r->setText(QString::number(value));
     }
     else if(ui->PiOneCaseO->isChecked())
@@ -296,7 +312,7 @@ void bluetoothSetting::on_pushButton_4_clicked()
         kalman_filter[1].R = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-        msgBox.exec();
+ //       msgBox.exec();
         ui->one_r->setText(QString::number(value));
     }
     else if(ui->PiOneCaseX->isChecked())
@@ -307,7 +323,7 @@ void bluetoothSetting::on_pushButton_4_clicked()
         kalman_filter[2].R = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-        msgBox.exec();
+ //       msgBox.exec();
         ui->two_r->setText(QString::number(value));
     }
     else
@@ -320,6 +336,9 @@ void bluetoothSetting::on_pushButton_4_clicked()
 
 void bluetoothSetting::on_pushButton_5_clicked()
 {
+    QMessageBox msgBox;
+    msgBox.setText("The value has successfully changed.");
+    msgBox.exec();
     close();
 }
 
@@ -337,7 +356,7 @@ void bluetoothSetting::on_pushButton_6_clicked()
         tx_power[0] = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-        msgBox.exec();
+ //       msgBox.exec();
         ui->zero_t->setText(QString::number(value));
     }
     else if(ui->PiOneCaseO->isChecked())
@@ -348,7 +367,7 @@ void bluetoothSetting::on_pushButton_6_clicked()
         tx_power[1] = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-        msgBox.exec();
+ //       msgBox.exec();
         ui->one_t->setText(QString::number(value));
     }
     else if(ui->PiOneCaseX->isChecked())
@@ -359,7 +378,7 @@ void bluetoothSetting::on_pushButton_6_clicked()
         tx_power[2] = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
-        msgBox.exec();
+  //      msgBox.exec();
         ui->two_t->setText(QString::number(value));
     }
     else

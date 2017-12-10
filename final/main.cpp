@@ -14,10 +14,10 @@ QString selectedMapPath = ":/img/9thfloor.png";
 
 _circle c[3];
 _dot predicted_dot;
-SKalman1D kalman_filter[3] = {{-59,0.1,0.1,10},{-59,0.1,0.1,10},{-59,0.1,0.1,10}};
+SKalman1D kalman_filter[3] = {{-59,0.01,0.01,3},{-59,0.01,0.01,3},{-59,0.01,0.01,3}};
 signed int device_x_pos[3] = {100,100,100};
 signed int device_y_pos[3] = {100,100,100};
-signed int tx_power[3] = {-54, -54, -59};
+signed int tx_power[3] = {-54, -59, -59};
 double cm_per_pixel = 5.8030;
 
 //double PiZero_X_value;
@@ -85,10 +85,6 @@ void _solve_position(_circle * circle, _dot * ans) {
 
     ans->x = (dot[0].x + dot[1].x + dot[2].x) / 3.0;
     ans->y = (dot[0].y + dot[1].y + dot[2].y) / 3.0;
-}
-
-double _rssi_to_dist(signed int rssi, signed int tx){
-    return pow( 10,( (tx-rssi)/20.0) );
 }
 
 double _rssi_to_dist(double rssi) {
