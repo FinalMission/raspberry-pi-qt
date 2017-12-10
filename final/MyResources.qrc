@@ -5,5 +5,8 @@
         <file>img/17thfloor.png</file>
         <file>img/flashscreen.png</file>
         <file>img/settingIcon.png</file>
+        <file>img/bluetoothsettingIcon.png</file>
+        <file>img/mapIcon.png</file>
+        <file>img/mapsettingIcon.png</file>
     </qresource>
 </RCC>
