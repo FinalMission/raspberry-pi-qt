@@ -66,7 +66,7 @@ void injectMapData()
         for(int j = 0; j < 75; j++)
         {
             scanf("%1d", &map[i][j]);
-            if(map[i][j]) printf("1!!\n");
+            if(map[i][j])printf("-");
         }
     }
     for(int i = 0; i < 35; i++)
@@ -76,7 +76,6 @@ void injectMapData()
             printf("%d", map[i][j]);
         }
     }
-    fclose(stdin);
 }
 
 

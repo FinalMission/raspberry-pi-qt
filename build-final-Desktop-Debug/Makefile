@@ -57,8 +57,7 @@ SOURCES       = ../final/main.cpp \
 		../final/mapsettings.cpp \
 		../final/bluetoothsetting.cpp \
 		../final/virtualkeyboard.cpp \
-		../final/roughnavi.c \
-		../final/mapdata.cpp qrc_MyResources.cpp \
+		../final/roughnavi.c qrc_MyResources.cpp \
 		moc_mainwindow.cpp \
 		moc_moving.cpp \
 		moc_mainmenu.cpp \
@@ -75,7 +74,6 @@ OBJECTS       = main.o \
 		bluetoothsetting.o \
 		virtualkeyboard.o \
 		roughnavi.o \
-		mapdata.o \
 		qrc_MyResources.o \
 		moc_mainwindow.o \
 		moc_moving.o \
@@ -166,8 +164,7 @@ DIST          = ../final/mapdata.txt \
 		../final/mapsettings.cpp \
 		../final/bluetoothsetting.cpp \
 		../final/virtualkeyboard.cpp \
-		../final/roughnavi.c \
-		../final/mapdata.cpp
+		../final/roughnavi.c
 QMAKE_TARGET  = final
 DESTDIR       = 
 TARGET        = final
@@ -338,7 +335,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../final/MyResources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../final/mainwindow.h ../final/moving.h ../final/shm.h ../final/trisol.h ../final/kfsol.h ../final/mainmenu.h ../final/mapsettings.h ../final/bluetoothsetting.h ../final/virtualkeyboard.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../final/main.cpp ../final/mainwindow.cpp ../final/moving.cpp ../final/trisol.c ../final/kfsol.c ../final/mainmenu.cpp ../final/mapsettings.cpp ../final/bluetoothsetting.cpp ../final/virtualkeyboard.cpp ../final/roughnavi.c ../final/mapdata.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../final/main.cpp ../final/mainwindow.cpp ../final/moving.cpp ../final/trisol.c ../final/kfsol.c ../final/mainmenu.cpp ../final/mapsettings.cpp ../final/bluetoothsetting.cpp ../final/virtualkeyboard.cpp ../final/roughnavi.c $(DISTDIR)/
 	$(COPY_FILE) --parents ../final/mainwindow.ui ../final/moving.ui ../final/mainmenu.ui ../final/mapsettings.ui ../final/bluetoothsetting.ui ../final/virtualkeyboard.ui $(DISTDIR)/
 
 
@@ -503,9 +500,6 @@ virtualkeyboard.o: ../final/virtualkeyboard.cpp ../final/virtualkeyboard.h \
 
 roughnavi.o: ../final/roughnavi.c 
 	$(CC) -c $(CFLAGS) $(INCPATH) -o roughnavi.o ../final/roughnavi.c
-
-mapdata.o: ../final/mapdata.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mapdata.o ../final/mapdata.cpp
 
 qrc_MyResources.o: qrc_MyResources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_MyResources.o qrc_MyResources.cpp
