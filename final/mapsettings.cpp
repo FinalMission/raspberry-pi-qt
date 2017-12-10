@@ -10,7 +10,7 @@
 #include <string.h>
 extern QString selectedMapPath;
 char ValueCharString[256];
-extern double cmPerPixel;
+extern double cm_per_pixel;
 
 mapsettings::mapsettings(QWidget *parent) :
     QDialog(parent),
@@ -24,7 +24,7 @@ mapsettings::mapsettings(QWidget *parent) :
             ui->comboBox->setCurrentIndex(index);
         }
     }
-    ui->CurrentRatio->setText(QString::number(cmPerPixel));
+    ui->CurrentRatio->setText(QString::number(cm_per_pixel));
     ui->label->setStyleSheet("font-weight: bold;");
 }
 
@@ -34,22 +34,6 @@ mapsettings::~mapsettings()
     //memset(ValueCharString, NULL, sizeof(ValueCharString));
 //    qDebug()<<"mapsetting: " << ValueCharString;
     delete ui;
-}
-
-void mapsettings::on_pushButton_clicked()
-{
-    VirtualKeyboard dlg;
-    memset(ValueCharString, NULL, sizeof(ValueCharString));
-    dlg.exec();
-    dlg.GetString(ValueCharString);
-    double value = atof(ValueCharString);
-    cmPerPixel = value;
-    qDebug() << "atof: " << value;
-    qDebug() << "ValueCharString: " << ValueCharString;
-    ui->CurrentRatio->setText(QString::number(cmPerPixel));
-    QMessageBox msgBox;
-    msgBox.setText("The value has successfully changed.");
-    msgBox.exec();
 }
 
 void mapsettings::on_comboBox_currentTextChanged(const QString &arg1)
@@ -67,4 +51,20 @@ void mapsettings::on_comboBox_currentTextChanged(const QString &arg1)
 void mapsettings::on_ApplyButton_clicked()
 {
     close();
+}
+
+void mapsettings::on_SettingButton_clicked()
+{
+    VirtualKeyboard dlg;
+    memset(ValueCharString, NULL, sizeof(ValueCharString));
+    dlg.exec();
+    dlg.GetString(ValueCharString);
+    double value = atof(ValueCharString);
+    cm_per_pixel = value;
+    qDebug() << "atof: " << value;
+    qDebug() << "ValueCharString: " << ValueCharString;
+    ui->CurrentRatio->setText(QString::number(cm_per_pixel));
+    QMessageBox msgBox;
+    msgBox.setText("The value has successfully changed.");
+    msgBox.exec();
 }

@@ -364,7 +364,8 @@ qrc_MyResources.cpp: ../final/MyResources.qrc \
 		../final/img/9thfloor.png \
 		../final/img/flashscreen.png \
 		../final/img/9thfloor2.png \
-		../final/img/17thfloor.png
+		../final/img/17thfloor.png \
+		../final/img/settingIcon.png
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/rcc -name MyResources ../final/MyResources.qrc -o qrc_MyResources.cpp
 
 compiler_moc_header_make_all: moc_mainwindow.cpp moc_moving.cpp moc_mainmenu.cpp moc_mapsettings.cpp moc_bluetoothsetting.cpp moc_virtualkeyboard.cpp
@@ -433,7 +434,9 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
-main.o: ../final/main.cpp ../final/mainwindow.h
+main.o: ../final/main.cpp ../final/mainwindow.h \
+		../final/trisol.h \
+		../final/kfsol.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../final/main.cpp
 
 mainwindow.o: ../final/mainwindow.cpp ../final/mainwindow.h \
@@ -469,7 +472,9 @@ mainmenu.o: ../final/mainmenu.cpp ../final/mainmenu.h \
 mapsettings.o: ../final/mapsettings.cpp ../final/mapsettings.h \
 		ui_mapsettings.h \
 		../final/moving.h \
-		ui_moving.h
+		ui_moving.h \
+		../final/virtualkeyboard.h \
+		../final/mainmenu.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mapsettings.o ../final/mapsettings.cpp
 
 bluetoothsetting.o: ../final/bluetoothsetting.cpp ../final/bluetoothsetting.h \

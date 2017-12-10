@@ -4,5 +4,6 @@
         <file>img/9thfloor2.png</file>
         <file>img/17thfloor.png</file>
         <file>img/flashscreen.png</file>
+        <file>img/settingIcon.png</file>
     </qresource>
 </RCC>

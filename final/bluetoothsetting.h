@@ -34,6 +34,10 @@ private slots:
 
     void on_pushButton_5_clicked();
 
+ //   void on_PiZeroW_toggled(bool checked);
+
+    void on_pushButton_6_clicked();
+
 private:
     Ui::bluetoothSetting *ui;
     QGraphicsScene scene;

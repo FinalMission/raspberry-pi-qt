@@ -27,6 +27,8 @@ private slots:
 
     void on_ApplyButton_clicked();
 
+    void on_SettingButton_clicked();
+
 private:
     Ui::mapsettings *ui;
 

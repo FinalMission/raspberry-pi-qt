@@ -4,32 +4,33 @@
 #include <QDebug>
 #include <sys/types.h>
 #include <unistd.h>
+#include <math.h>
 
 #include "trisol.h"
 #include "kfsol.h"
 
 pid_t pid_temp;
 QString selectedMapPath = ":/img/9thfloor.png";
-//char ValueCharString[256];
-double cmPerPixel = 1;
-double PiZero_X_value;
-double PiOneCaseO_X_value;
-double PiOneCaseX_X_value;
-double PiZero_Q_value;
-double PiOneCaseO_Q_value;
-double PiOneCaseX_Q_value;
-double PiZero_P_value;
-double PiOneCaseO_P_value;
-double PiOneCaseX_P_value;
-double PiZero_R_value;
-double PiOneCaseO_R_value;
-double PiOneCaseX_R_value;
+
+_circle c[3];
+_dot predicted_dot;
+SKalman1D kalman_filter[3] = {{10,10,10,100},{10,10,10,100},{10,10,10,100}};
+signed int device_x_pos[3] = {100,100,100};
+signed int device_y_pos[3] = {100,100,100};
+signed int tx_power[3] = {-59, -59, -59};
+double cm_per_pixel = 5.80303;
+
+//double PiZero_X_value;
+//double PiOneCaseO_X_value;
+//double PiOneCaseX_X_value;
+
 
 void KalmanPredictUpdate1D(SKalman1D *kalman, double NewData);
 void _solve_line(_circle c1, _circle c2, _line * l);
 void _solve_dot(_line l1, _line l2, _dot * d);
 void _solve_position(_circle * circle, _dot * ans);
 void _solve_position(_circle * circle, _dot * ans);
+double _rssi_to_dist(signed int rssi, signed int tx);
 
 int main(int argc, char *argv[])
 {
@@ -88,3 +89,33 @@ void _solve_position(_circle * circle, _dot * ans) {
     ans->x = (dot[0].x + dot[1].x + dot[2].x) / 3.0;
     ans->y = (dot[0].y + dot[1].y + dot[2].y) / 3.0;
 }
+
+double _rssi_to_dist(signed int rssi, signed int tx) {
+    return pow( 10,((rssi-tx)/20.0) );
+}
+
+/* ############## sample codes of trisol. ###################
+_circle c[3] = { { 0, 0, 1 }, { 1, 4, 1 }, { 2, 0, 1 } };
+_dot d;
+_solve_position(c, &d);
+qDebug("x = %.2f\ny = %.2f", d.x, d.y);
+*/
+
+/* ############## sample codes of kfsol. ####################
+double sample[100];
+for (int i = 0; i < 100; i++)
+    sample[i] = (-10 + rand() % 201/10.0 );
+    //sample[i] = i>50?50:i;
+
+SKalman1D kalman;
+kalman.X = 0;
+kalman.Q = 10;
+kalman.P = 10;
+kalman.R = 200;
+
+printf("now position = %.2f \n", kalman.X);
+for (int i = 0; i < 100; i++) {
+    KalmanPredictUpdate1D(&kalman, sample[i]);
+    qDebug("now pos = %6.2f, real pos = %6.2f \n", kalman.X, sample[i]);
+}
+*/
