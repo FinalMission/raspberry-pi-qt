@@ -25,6 +25,7 @@ public:
     QPushButton *mapButton;
     QPushButton *BLEButton;
     QPushButton *mapsetButton;
+    QPushButton *pushButton;
 
     void setupUi(QDialog *MainMenu)
     {
@@ -40,6 +41,9 @@ public:
         mapsetButton = new QPushButton(MainMenu);
         mapsetButton->setObjectName(QStringLiteral("mapsetButton"));
         mapsetButton->setGeometry(QRect(393, 280, 211, 31));
+        pushButton = new QPushButton(MainMenu);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(760, 0, 31, 31));
 
         retranslateUi(MainMenu);
 
@@ -52,6 +56,7 @@ public:
         mapButton->setText(QApplication::translate("MainMenu", "map", Q_NULLPTR));
         BLEButton->setText(QApplication::translate("MainMenu", "bluetooth setting", Q_NULLPTR));
         mapsetButton->setText(QApplication::translate("MainMenu", "mapsetting", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("MainMenu", "X", Q_NULLPTR));
     } // retranslateUi
 
 };

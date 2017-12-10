@@ -45,14 +45,14 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_3;
     QPushButton *pushButton_4;
-    QFrame *line_2;
     QPushButton *pushButton_5;
+    QFrame *line_2;
 
     void setupUi(QDialog *bluetoothSetting)
     {
         if (bluetoothSetting->objectName().isEmpty())
             bluetoothSetting->setObjectName(QStringLiteral("bluetoothSetting"));
-        bluetoothSetting->resize(835, 516);
+        bluetoothSetting->resize(822, 516);
         graphicsView = new QGraphicsView(bluetoothSetting);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
         graphicsView->setGeometry(QRect(0, 1, 821, 401));
@@ -139,6 +139,13 @@ public:
 
         horizontalLayout_2->addWidget(pushButton_4);
 
+        pushButton_5 = new QPushButton(verticalLayoutWidget);
+        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+        sizePolicy1.setHeightForWidth(pushButton_5->sizePolicy().hasHeightForWidth());
+        pushButton_5->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_2->addWidget(pushButton_5);
+
 
         verticalLayout_2->addLayout(horizontalLayout_2);
 
@@ -149,9 +156,6 @@ public:
 
         verticalLayout_2->addWidget(line_2);
 
-        pushButton_5 = new QPushButton(bluetoothSetting);
-        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
-        pushButton_5->setGeometry(QRect(583, 480, 171, 31));
 
         retranslateUi(bluetoothSetting);
 

@@ -36,8 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->graphicsView->setScene(&scene1);
   ui->graphicsView->show();
   this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-//  QTimer::singleShot(3000, this, SLOT(flashScreen()));
-  flashScreen();
+  QTimer::singleShot(3000, this, SLOT(flashScreen()));
 }
 
 void MainWindow::flashScreen(void)
@@ -46,6 +45,7 @@ void MainWindow::flashScreen(void)
     //dlg.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "MOVING GUI PROTOTYPE"));
     dlg.setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     dlg.exec();
+//    MainWindow::~MainWindow();
 }
 
 MainWindow::~MainWindow()

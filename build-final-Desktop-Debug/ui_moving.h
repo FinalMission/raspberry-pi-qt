@@ -16,6 +16,7 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 
 QT_BEGIN_NAMESPACE
@@ -25,19 +26,26 @@ class Ui_MOVING
 public:
     QGraphicsView *graphicsView;
     QSlider *horizontalSlider;
+    QPushButton *pushButton;
 
     void setupUi(QDialog *MOVING)
     {
         if (MOVING->objectName().isEmpty())
             MOVING->setObjectName(QStringLiteral("MOVING"));
-        MOVING->resize(1000, 600);
+        MOVING->resize(840, 658);
         graphicsView = new QGraphicsView(MOVING);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
-        graphicsView->setGeometry(QRect(20, 20, 971, 541));
+        graphicsView->setGeometry(QRect(0, 0, 800, 480));
         horizontalSlider = new QSlider(MOVING);
         horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
-        horizontalSlider->setGeometry(QRect(809, 485, 171, 71));
+        horizontalSlider->setGeometry(QRect(624, 404, 171, 71));
         horizontalSlider->setOrientation(Qt::Horizontal);
+        pushButton = new QPushButton(MOVING);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(768, 1, 31, 31));
+        graphicsView->raise();
+        pushButton->raise();
+        horizontalSlider->raise();
 
         retranslateUi(MOVING);
 
@@ -47,6 +55,7 @@ public:
     void retranslateUi(QDialog *MOVING)
     {
         MOVING->setWindowTitle(QApplication::translate("MOVING", "Dialog", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("MOVING", "X", Q_NULLPTR));
     } // retranslateUi
 
 };

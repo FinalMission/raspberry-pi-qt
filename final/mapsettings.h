@@ -14,7 +14,6 @@ class mapsettings : public QDialog
 public:
     explicit mapsettings(QWidget *parent = 0);
     ~mapsettings();
- QString fileName;
 
     
 private slots:
@@ -26,9 +25,11 @@ private slots:
 
 //    void on_comboBox_activated(int index);
 
+    void on_ApplyButton_clicked();
+
 private:
     Ui::mapsettings *ui;
-    char ValueCharString[256];
+
 };
 
 #endif // MAPSETTINGS_H

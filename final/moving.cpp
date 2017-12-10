@@ -148,3 +148,8 @@ void MOVING::on_horizontalSlider_sliderMoved(int value)
     ui->graphicsView->scale(nowZoom/beforeZoom, nowZoom/beforeZoom);
 }
 
+
+void MOVING::on_pushButton_clicked()
+{
+    close();
+}

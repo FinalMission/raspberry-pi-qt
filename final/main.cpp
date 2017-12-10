@@ -10,6 +10,20 @@
 
 pid_t pid_temp;
 QString selectedMapPath = ":/img/9thfloor.png";
+//char ValueCharString[256];
+double cmPerPixel = 1;
+double PiZero_X_value;
+double PiOneCaseO_X_value;
+double PiOneCaseX_X_value;
+double PiZero_Q_value;
+double PiOneCaseO_Q_value;
+double PiOneCaseX_Q_value;
+double PiZero_P_value;
+double PiOneCaseO_P_value;
+double PiOneCaseX_P_value;
+double PiZero_R_value;
+double PiOneCaseO_R_value;
+double PiOneCaseX_R_value;
 
 void KalmanPredictUpdate1D(SKalman1D *kalman, double NewData);
 void _solve_line(_circle c1, _circle c2, _line * l);
@@ -28,6 +42,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     MainWindow w;
+    w.setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     w.show();
     return a.exec();
 }

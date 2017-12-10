@@ -9,6 +9,8 @@
 #include "mainmenu.h"
 #include <string.h>
 extern QString selectedMapPath;
+char ValueCharString[256];
+extern double cmPerPixel;
 
 mapsettings::mapsettings(QWidget *parent) :
     QDialog(parent),
@@ -22,24 +24,29 @@ mapsettings::mapsettings(QWidget *parent) :
             ui->comboBox->setCurrentIndex(index);
         }
     }
+    ui->CurrentRatio->setText(QString::number(cmPerPixel));
+    ui->label->setStyleSheet("font-weight: bold;");
 }
 
 mapsettings::~mapsettings()
 {
-    qDebug()<<"mapsetting: " << ValueCharString;
+//    qDebug()<<"mapsetting: " << ValueCharString;
     //memset(ValueCharString, NULL, sizeof(ValueCharString));
-    qDebug()<<"mapsetting: " << ValueCharString;
+//    qDebug()<<"mapsetting: " << ValueCharString;
     delete ui;
 }
 
 void mapsettings::on_pushButton_clicked()
 {
     VirtualKeyboard dlg;
+    memset(ValueCharString, NULL, sizeof(ValueCharString));
     dlg.exec();
     dlg.GetString(ValueCharString);
     double value = atof(ValueCharString);
-    //cmPerPixel = value;
-    ui->CurrentRatio->setText(ValueCharString);
+    cmPerPixel = value;
+    qDebug() << "atof: " << value;
+    qDebug() << "ValueCharString: " << ValueCharString;
+    ui->CurrentRatio->setText(QString::number(cmPerPixel));
     QMessageBox msgBox;
     msgBox.setText("The value has successfully changed.");
     msgBox.exec();
@@ -47,9 +54,6 @@ void mapsettings::on_pushButton_clicked()
 
 void mapsettings::on_comboBox_currentTextChanged(const QString &arg1)
 {
-
-
-
      if(ui->comboBox->currentText() == "9")
      {
          selectedMapPath = ":/img/9thfloor.png";
@@ -58,4 +62,9 @@ void mapsettings::on_comboBox_currentTextChanged(const QString &arg1)
      {
          selectedMapPath = ":/img/17thfloor.png";
      }
+}
+
+void mapsettings::on_ApplyButton_clicked()
+{
+    close();
 }

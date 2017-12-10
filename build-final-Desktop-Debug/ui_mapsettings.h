@@ -34,15 +34,16 @@ public:
     QLabel *CurrentRatio;
     QComboBox *comboBox;
     QLabel *label;
+    QPushButton *ApplyButton;
 
     void setupUi(QDialog *mapsettings)
     {
         if (mapsettings->objectName().isEmpty())
             mapsettings->setObjectName(QStringLiteral("mapsettings"));
-        mapsettings->resize(454, 171);
+        mapsettings->resize(303, 192);
         gridLayoutWidget = new QWidget(mapsettings);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(20, 30, 421, 120));
+        gridLayoutWidget->setGeometry(QRect(20, 30, 271, 120));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
@@ -54,7 +55,13 @@ public:
         sizePolicy.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
         pushButton->setSizePolicy(sizePolicy);
         pushButton->setMinimumSize(QSize(0, 0));
-        QIcon icon(QIcon::fromTheme(QStringLiteral("setting")));
+        QIcon icon;
+        QString iconThemeName = QStringLiteral("setting");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon.addFile(QStringLiteral("."), QSize(), QIcon::Normal, QIcon::Off);
+        }
         pushButton->setIcon(icon);
 
         gridLayout->addWidget(pushButton, 1, 2, 1, 1);
@@ -81,16 +88,17 @@ public:
 
         label = new QLabel(gridLayoutWidget);
         label->setObjectName(QStringLiteral("label"));
-        QSizePolicy sizePolicy1(QSizePolicy::Ignored, QSizePolicy::Preferred);
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setVerticalStretch(10);
         sizePolicy1.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
         label->setSizePolicy(sizePolicy1);
 
         gridLayout->addWidget(label, 0, 0, 1, 1);
 
-        gridLayoutWidget->raise();
-        label->raise();
+        ApplyButton = new QPushButton(mapsettings);
+        ApplyButton->setObjectName(QStringLiteral("ApplyButton"));
+        ApplyButton->setGeometry(QRect(210, 160, 91, 29));
 
         retranslateUi(mapsettings);
 
@@ -110,6 +118,7 @@ public:
          << QApplication::translate("mapsettings", "17", Q_NULLPTR)
         );
         label->setText(QApplication::translate("mapsettings", "Setting", Q_NULLPTR));
+        ApplyButton->setText(QApplication::translate("mapsettings", "Apply", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -9,6 +9,18 @@
 #include <string.h>
 #include <QDebug>
 extern QString selectedMapPath;
+extern double PiZero_X_value;
+extern double PiOneCaseO_X_value;
+extern double PiOneCaseX_X_value;
+extern double PiZero_Q_value;
+extern double PiOneCaseO_Q_value;
+extern double PiOneCaseX_Q_value;
+extern double PiZero_P_value;
+extern double PiOneCaseO_P_value;
+extern double PiOneCaseX_P_value;
+extern double PiZero_R_value;
+extern double PiOneCaseO_R_value;
+extern double PiOneCaseX_R_value;
 
 bluetoothSetting::bluetoothSetting(QWidget *parent) :
     QDialog(parent),
@@ -47,12 +59,12 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
             chkEllipse[0] = 1;
             QBrush redBrush(Qt::red);
             QPen blackPen(Qt::black);
-            ellipse0 = scene.addEllipse(mx-20, my-20, 15, 15, blackPen, redBrush);
+            ellipse0 = scene.addEllipse(mx-40, my-35, 15, 15, blackPen, redBrush);
         }
         else
         {
             ellipse0->setRect(QRectF(0, 0, 15, 15));
-            ellipse0->setPos(mx-20, my-20);
+            ellipse0->setPos(mx-40, my-35);
         }
     }
     else if(ui->PiOneCaseO->isChecked())
@@ -62,14 +74,14 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
             chkEllipse[1] = 1;
             QBrush blueBrush(Qt::blue);
             QPen blackPen(Qt::black);
-            ellipse1 = scene.addEllipse(mx-20, my-20, 15, 15, blackPen, blueBrush);
+            ellipse1 = scene.addEllipse(mx-40, my-35, 15, 15, blackPen, blueBrush);
             qDebug() << "ellipse1 "<<  ellipse1;
         }
         else
         {
              qDebug() << "else ellipse1 "<<  ellipse1;
              ellipse1->setRect(QRectF(0, 0, 15, 15));
-             ellipse1->setPos(mx-20, my-20);
+             ellipse1->setPos(mx-40, my-35);
         }
     }
     else if(ui->PiOneCaseX->isChecked())
@@ -79,12 +91,12 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
             chkEllipse[2] = 1;
             QBrush greenBrush(Qt::green);
             QPen blackPen(Qt::black);
-            ellipse2 = scene.addEllipse(mx-20, my-20, 15, 15, blackPen, greenBrush);
+            ellipse2 = scene.addEllipse(mx-40, my-35, 15, 15, blackPen, greenBrush);
         }
         else
         {
             ellipse2->setRect(QRectF(0, 0, 15, 15));
-            ellipse2->setPos(mx-20, my-20);
+            ellipse2->setPos(mx-40, my-35);
         }
     }
     else
@@ -113,7 +125,7 @@ void bluetoothSetting::on_pushButton_2_clicked()
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
-//      PiZero_X_value = value;
+        PiZero_X_value = value;
         printf("%f\n", value);
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
@@ -124,7 +136,7 @@ void bluetoothSetting::on_pushButton_2_clicked()
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
- //     PiOneCaseO_X_value = value;
+        PiOneCaseO_X_value = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
         msgBox.exec();
@@ -134,7 +146,7 @@ void bluetoothSetting::on_pushButton_2_clicked()
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
- //     PiOneCaseX_X_value = value;
+        PiOneCaseX_X_value = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
         msgBox.exec();
@@ -158,7 +170,7 @@ void bluetoothSetting::on_pushButton_clicked()
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
- //       value = PiZero_Q_value;
+        PiZero_Q_value = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
         msgBox.exec();
@@ -168,7 +180,7 @@ void bluetoothSetting::on_pushButton_clicked()
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
- //       value = PiOneCaseO_Q_value;
+         PiOneCaseO_Q_value = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
         msgBox.exec();
@@ -178,7 +190,7 @@ void bluetoothSetting::on_pushButton_clicked()
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
-  //      value = PiOneCaseX_Q_value;
+        PiOneCaseX_Q_value = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
         msgBox.exec();
@@ -201,7 +213,7 @@ void bluetoothSetting::on_pushButton_3_clicked()
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
-        //       value = PiZero_P_value;
+        PiZero_P_value = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
         msgBox.exec();
@@ -211,7 +223,7 @@ void bluetoothSetting::on_pushButton_3_clicked()
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
- //       value = PiOneCaseO_P_value;
+        PiOneCaseO_P_value = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
         msgBox.exec();
@@ -221,7 +233,7 @@ void bluetoothSetting::on_pushButton_3_clicked()
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
- //       value = PiOneCaseX_P_value;
+        PiOneCaseX_P_value = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
         msgBox.exec();
@@ -244,7 +256,7 @@ void bluetoothSetting::on_pushButton_4_clicked()
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
- //       value = PiZero_R_value;
+        PiZero_R_value = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
         msgBox.exec();
@@ -255,7 +267,7 @@ void bluetoothSetting::on_pushButton_4_clicked()
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
-  //      value = PiOneCaseO_R_value;
+        PiOneCaseO_R_value = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
         msgBox.exec();
@@ -265,7 +277,7 @@ void bluetoothSetting::on_pushButton_4_clicked()
         dlg.exec();
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
- //       value = PiOneCaseX_R_value;
+        PiOneCaseX_R_value = value;
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
         msgBox.exec();

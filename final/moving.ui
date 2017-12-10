@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>600</height>
+    <width>840</width>
+    <height>658</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,18 +16,18 @@
   <widget class="QGraphicsView" name="graphicsView">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>971</width>
-     <height>541</height>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>480</height>
     </rect>
    </property>
   </widget>
   <widget class="QSlider" name="horizontalSlider">
    <property name="geometry">
     <rect>
-     <x>809</x>
-     <y>485</y>
+     <x>624</x>
+     <y>404</y>
      <width>171</width>
      <height>71</height>
     </rect>
@@ -36,6 +36,22 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>768</x>
+     <y>1</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>X</string>
+   </property>
+  </widget>
+  <zorder>graphicsView</zorder>
+  <zorder>pushButton</zorder>
+  <zorder>horizontalSlider</zorder>
  </widget>
  <resources/>
  <connections/>
