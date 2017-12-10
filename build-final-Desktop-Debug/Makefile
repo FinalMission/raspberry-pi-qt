@@ -363,7 +363,10 @@ qrc_MyResources.cpp: ../final/MyResources.qrc \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/rcc \
 		../final/img/9thfloor.png \
 		../final/img/flashscreen.png \
+		../final/img/bluetoothsettingIcon.png \
 		../final/img/9thfloor2.png \
+		../final/img/mapsettingIcon.png \
+		../final/img/mapIcon.png \
 		../final/img/17thfloor.png \
 		../final/img/settingIcon.png
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/rcc -name MyResources ../final/MyResources.qrc -o qrc_MyResources.cpp
@@ -479,7 +482,9 @@ mapsettings.o: ../final/mapsettings.cpp ../final/mapsettings.h \
 
 bluetoothsetting.o: ../final/bluetoothsetting.cpp ../final/bluetoothsetting.h \
 		ui_bluetoothsetting.h \
-		../final/virtualkeyboard.h
+		../final/virtualkeyboard.h \
+		../final/kfsol.h \
+		../final/trisol.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bluetoothsetting.o ../final/bluetoothsetting.cpp
 
 virtualkeyboard.o: ../final/virtualkeyboard.cpp ../final/virtualkeyboard.h \

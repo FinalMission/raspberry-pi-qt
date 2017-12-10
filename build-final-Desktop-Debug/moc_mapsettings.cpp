@@ -82,8 +82,8 @@ void mapsettings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         mapsettings *_t = static_cast<mapsettings *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_pushButton_2_clicked(); break;
-        case 1: _t->on_pushButton_clicked(); break;
+//        case 0: _t->on_pushButton_2_clicked(); break;
+//        case 1: _t->on_pushButton_clicked(); break;
         case 2: _t->on_comboBox_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 3: _t->on_ApplyButton_clicked(); break;
         case 4: _t->on_SettingButton_clicked(); break;

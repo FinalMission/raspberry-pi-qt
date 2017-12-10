@@ -31,19 +31,23 @@ public:
     {
         if (MainMenu->objectName().isEmpty())
             MainMenu->setObjectName(QStringLiteral("MainMenu"));
-        MainMenu->resize(800, 640);
+        MainMenu->resize(800, 480);
         mapButton = new QPushButton(MainMenu);
         mapButton->setObjectName(QStringLiteral("mapButton"));
-        mapButton->setGeometry(QRect(193, 140, 411, 31));
+        mapButton->setGeometry(QRect(270, 110, 271, 251));
+        mapButton->setStyleSheet(QLatin1String("#mapButton\n"
+"{\n"
+"	background-image: url(:/img/mapIcon.png);\n"
+"}"));
         BLEButton = new QPushButton(MainMenu);
         BLEButton->setObjectName(QStringLiteral("BLEButton"));
-        BLEButton->setGeometry(QRect(313, 210, 291, 31));
+        BLEButton->setGeometry(QRect(-4, 0, 271, 481));
         mapsetButton = new QPushButton(MainMenu);
         mapsetButton->setObjectName(QStringLiteral("mapsetButton"));
-        mapsetButton->setGeometry(QRect(393, 280, 211, 31));
+        mapsetButton->setGeometry(QRect(535, 0, 266, 481));
         pushButton = new QPushButton(MainMenu);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(760, 0, 31, 31));
+        pushButton->setGeometry(QRect(770, 0, 31, 31));
 
         retranslateUi(MainMenu);
 
