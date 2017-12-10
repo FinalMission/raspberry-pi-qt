@@ -9,6 +9,9 @@ MainMenu::MainMenu(QWidget *parent) :
     ui(new Ui::MainMenu)
 {
     ui->setupUi(this);
+/*    QPalette pal = ui->palette();
+    pal.setColor(QPalette::Window, Qt::yellow);
+    ui->setPalette(pal); */
 }
 
 MainMenu::~MainMenu()
@@ -20,6 +23,7 @@ void MainMenu::on_mapButton_clicked()
 {
     MOVING dlg;
     dlg.setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    dlg.setStyleSheet("QMainWindow {background: 'yellow';}");
     dlg.exec();
 }
 

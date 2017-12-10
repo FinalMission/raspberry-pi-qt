@@ -17,7 +17,7 @@ _dot predicted_dot;
 SKalman1D kalman_filter[3] = {{-59,0.1,0.1,10},{-59,0.1,0.1,10},{-59,0.1,0.1,10}};
 signed int device_x_pos[3] = {100,100,100};
 signed int device_y_pos[3] = {100,100,100};
-signed int tx_power[3] = {-59, -59, -59};
+signed int tx_power[3] = {-54, -54, -59};
 double cm_per_pixel = 5.8030;
 
 //double PiZero_X_value;
@@ -29,7 +29,7 @@ void _solve_line(_circle c1, _circle c2, _line * l);
 void _solve_dot(_line l1, _line l2, _dot * d);
 void _solve_position(_circle * circle, _dot * ans);
 void _solve_position(_circle * circle, _dot * ans);
-double _rssi_to_dist(double rssi);
+double _rssi_to_dist(signed int rssi, signed int tx);
 
 int main(int argc, char *argv[])
 {
@@ -87,9 +87,14 @@ void _solve_position(_circle * circle, _dot * ans) {
     ans->y = (dot[0].y + dot[1].y + dot[2].y) / 3.0;
 }
 
+<<<<<<< HEAD
+double _rssi_to_dist(signed int rssi, signed int tx) {
+    return pow( 10,( (tx-rssi)/20.0) );
+=======
 double _rssi_to_dist(double rssi) {
     //return 10.0;
     return pow( 10.0,( (-59.0-rssi)/20.0) );
+>>>>>>> 432c95e22b5dd027f2f851b2c1c7a28efff64651
 }
 
 /* ############## sample codes of trisol. ###################

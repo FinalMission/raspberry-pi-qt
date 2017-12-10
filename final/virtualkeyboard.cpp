@@ -13,6 +13,9 @@ VirtualKeyboard::VirtualKeyboard(QWidget *parent) :
     memset(value, 0, sizeof(value));
     char_count = 0;
     ui->setupUi(this);
+/*    QPalette pal = a->palette();
+    pal.setColor(QPalette::Window, Qt::yellow);
+    a->setPalette(pal);*/
 }
 
 VirtualKeyboard::~VirtualKeyboard()

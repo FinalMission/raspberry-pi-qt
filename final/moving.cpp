@@ -27,7 +27,7 @@ extern void _solve_line(_circle c1, _circle c2, _line * l);
 extern void _solve_dot(_line l1, _line l2, _dot * d);
 extern void _solve_position(_circle * circle, _dot * ans);
 extern void _solve_position(_circle * circle, _dot * ans);
-extern double _rssi_to_dist(double rssi);
+extern double _rssi_to_dist(signed int rssi, signed int tx);
 
 
 MOVING::MOVING(QWidget *parent) :
@@ -100,14 +100,14 @@ void MOVING::shmchk(void)
        //qDebug("(%.2f,%.2f), (%.2f,%.2f), (%.2f,%.2f) ",
        //       c[0].a, c[0].b, c[1].a, c[1].b, c[2].a, c[2].b);
 
-       c[0].k = _rssi_to_dist(kalman_filter[0].X);
-       c[1].k = _rssi_to_dist(kalman_filter[1].X);
-       c[2].k = _rssi_to_dist(kalman_filter[2].X);
+       c[0].k = kalman_filter[0].X;
+       c[1].k = kalman_filter[1].X;
+       c[2].k = kalman_filter[2].X;
 
        _solve_position(c, &predicted_dot);
 
-       predicted_dot.x = predicted_dot.x*100.0/cm_per_pixel;
-       predicted_dot.y = predicted_dot.y*100.0/cm_per_pixel;
+       predicted_dot.x = predicted_dot.x*100/cm_per_pixel;
+       predicted_dot.y = predicted_dot.y*100/cm_per_pixel;
 
        if (predicted_dot.x < 10.0 ) predicted_dot.x = 10.0;
        else if (predicted_dot.x > 740.0 ) predicted_dot.x = 740.0;
