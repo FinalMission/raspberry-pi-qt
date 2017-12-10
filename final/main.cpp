@@ -14,7 +14,7 @@ QString selectedMapPath = ":/img/9thfloor.png";
 
 _circle c[3];
 _dot predicted_dot;
-SKalman1D kalman_filter[3] = {{-59,0.1,0.1,5},{-59,0.1,0.1,5},{-59,0.1,0.1,5}};
+SKalman1D kalman_filter[3] = {{-59,0.1,0.1,10},{-59,0.1,0.1,10},{-59,0.1,0.1,10}};
 signed int device_x_pos[3] = {100,100,100};
 signed int device_y_pos[3] = {100,100,100};
 signed int tx_power[3] = {-59, -59, -59};
@@ -33,10 +33,8 @@ double _rssi_to_dist(double rssi);
 
 int main(int argc, char *argv[])
 {
-    qDebug() << "..!!";
     pid_temp = fork();
     if (pid_temp == 0) {
-        qDebug() << "qDebug!!";
         execlp("sudo", "sudo", "/home/pi/workspace/raspberrypi-bluetooth/bin/scan", NULL);
     }
 
@@ -90,6 +88,7 @@ void _solve_position(_circle * circle, _dot * ans) {
 }
 
 double _rssi_to_dist(double rssi) {
+    //return 10.0;
     return pow( 10.0,( (-59.0-rssi)/20.0) );
 }
 

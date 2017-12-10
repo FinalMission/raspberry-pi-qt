@@ -12,6 +12,7 @@
 #define SEG3 0x77665544
 #define PI0W1 "B8:27:EB:0C:CF:BD"
 #define PI0W2 "B8:27:EB:4F:CF:45"
+#define PI0W3 "B8:27:EB:49:E4:48"
 #define PI1 "00:1A:7D:DA:71:13"
 typedef struct
 {
