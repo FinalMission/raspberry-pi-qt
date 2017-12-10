@@ -118,7 +118,7 @@ public:
 
         gridLayoutWidget_2 = new QWidget(bluetoothSetting);
         gridLayoutWidget_2->setObjectName(QStringLiteral("gridLayoutWidget_2"));
-        gridLayoutWidget_2->setGeometry(QRect(216, 380, 561, 121));
+        gridLayoutWidget_2->setGeometry(QRect(226, 380, 531, 121));
         gridLayout_3 = new QGridLayout(gridLayoutWidget_2);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         gridLayout_3->setContentsMargins(0, 0, 0, 0);
@@ -295,7 +295,7 @@ public:
 
         gridLayoutWidget_3 = new QWidget(bluetoothSetting);
         gridLayoutWidget_3->setObjectName(QStringLiteral("gridLayoutWidget_3"));
-        gridLayoutWidget_3->setGeometry(QRect(101, 380, 111, 121));
+        gridLayoutWidget_3->setGeometry(QRect(106, 380, 111, 121));
         gridLayout_4 = new QGridLayout(gridLayoutWidget_3);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
         gridLayout_4->setContentsMargins(0, 0, 0, 0);

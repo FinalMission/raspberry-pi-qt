@@ -42,7 +42,7 @@ public:
         horizontalSlider->setOrientation(Qt::Horizontal);
         pushButton = new QPushButton(MOVING);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(770, 0, 31, 31));
+        pushButton->setGeometry(QRect(760, 0, 30, 30));
         graphicsView->raise();
         pushButton->raise();
         horizontalSlider->raise();

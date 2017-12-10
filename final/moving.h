@@ -51,7 +51,7 @@ private:
 
 protected:
 //    virtual void wheelEvent(QWheelEvent* event);
-    void mousePressEvent(QMouseEvent * event);
+    void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
     bool viewportEvent(QEvent *event);
  //   void mouseGrabber();

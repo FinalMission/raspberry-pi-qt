@@ -46,17 +46,18 @@ void MainWindow::flashScreen(void)
     dlg.setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     dlg.exec();
 //    MainWindow::~MainWindow();
+    QTimer::singleShot(1, this, SLOT(close()));
 }
 
 MainWindow::~MainWindow()
 {
+    qDebug() <<"des called";
     ret = shmdt(packetshm);
     if(ret == ERROR)
     {
         printf("detach shared memory error: %s (%d)\n", strerror(errno), __LINE__);
         //return EXIT_FAILURE;
     }
-    delete ui;
 }
 
 /*void MainWindow::on_pushButton_clicked()
