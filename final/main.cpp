@@ -5,12 +5,37 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <math.h>
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "trisol.h"
 #include "kfsol.h"
 
 pid_t pid_temp;
 QString selectedMapPath = ":/img/9thfloor.png";
+int Navi_Des_X;
+int Navi_Des_Y;
+/*int map[7][16] = { {1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1 },
+{ 1, 1,	1,	1,	1,	0,	1,	0,	0,	1,	0,	0,	1,	0,	0,	1 },
+{ 1, 0,	0,	1,	0,	0,	1,	0,	0,	1,	0,	0,	1,	0,	0,	1 },
+{ 1, 0,	0,	1,	0,	0,	1,	0,	0,	1,	0,	0,	1,	0,	0,	1 },
+{ 1, 1,	0,	1,	1,	0,	1,	0,	0,	0,	0,	1,	0,	0,	0,	1 },
+{ 1, 1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1 },
+{ 1, 1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0,	1 }};
+*/
+int map[35][75];
+int Des_I;
+int Des_J;
+int Src_I;
+int Src_J;
+int min = 0x7fffff;
+struct st
+{
+    int i, j;
+};
+struct st route[1000000];
+int ans[35][75];
+int chk[35][75];
 
 _circle c[3];
 _dot predicted_dot;
@@ -30,9 +55,34 @@ void _solve_dot(_line l1, _line l2, _dot * d);
 void _solve_position(_circle * circle, _dot * ans);
 void _solve_position(_circle * circle, _dot * ans);
 double _rssi_to_dist(signed int rssi, signed int tx);
+void DFS(int I, int J, int n);
+void injectMapData(void);
+
+void injectMapData()
+{
+    freopen("mapData.txt", "r", stdin);
+    for(int i = 0; i < 35; i++)
+    {
+        for(int j = 0; j < 75; j++)
+        {
+            scanf("%1d", &map[i][j]);
+            if(map[i][j]) printf("1!!\n");
+        }
+    }
+    for(int i = 0; i < 35; i++)
+    {
+        for(int j = 0; j < 75; j++)
+        {
+            printf("%d", map[i][j]);
+        }
+    }
+    fclose(stdin);
+}
+
 
 int main(int argc, char *argv[])
 {
+    injectMapData();
     pid_temp = fork();
     if (pid_temp == 0) {
         execlp("sudo", "sudo", "/home/pi/workspace/raspberrypi-bluetooth/bin/scan", NULL);
@@ -44,6 +94,58 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 }
+
+void DFS(int I, int J, int n)
+{
+    if (I > 34 || I < 0 || J > 74 || J < 0) return;
+    if (n > min) return;
+
+    chk[I][J] = 1;
+    route[n].i = I;
+    route[n].j = J;
+
+    if (I == Des_I && J == Des_J)
+    {
+        memset(ans, 0, sizeof(ans));
+        min = n;
+        for (int i = 0; i <= n; i++)
+        {
+            ans[route[i].i][route[i].j] = 1;
+        }
+        return;
+    }
+
+
+    if (map[I - 1][J] == 1 && chk[I - 1][J] == 0)
+    {
+        DFS(I - 1, J, n + 1);
+        chk[I - 1][J] = 0;
+        route[n + 1].i = 0;
+        route[n + 1].j = 0;
+    }
+    if (map[I][J + 1] == 1 && chk[I][J + 1] == 0)
+    {
+        DFS(I, J + 1, n + 1);
+        chk[I][J + 1] = 0;
+        route[n + 1].i = 0;
+        route[n + 1].j = 0;
+    }
+    if (map[I + 1][J] == 1 && chk[I + 1][J] == 0)
+    {
+        DFS(I + 1, J, n + 1);
+        chk[I + 1][J] = 0;
+        route[n + 1].i = 0;
+        route[n + 1].j = 0;
+    }
+    if (map[I][J - 1] == 1 && chk[I][J - 1] == 0)
+    {
+        DFS(I, J - 1, n + 1);
+        chk[I][J - 1] = 0;
+        route[n + 1].i = 0;
+        route[n + 1].j = 0;
+    }
+}
+
 
 
 void KalmanPredictUpdate1D(SKalman1D* Kalman, double NewData)

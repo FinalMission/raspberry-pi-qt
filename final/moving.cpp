@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "mapsettings.h"
 #include "ui_mapsettings.h"
+#include <QMessageBox>
 
 extern _circle c[3];
 extern _dot predicted_dot;
@@ -17,10 +18,25 @@ extern signed int tx_power[3];
 extern signed int device_x_pos[3];
 extern signed int device_y_pos[3];
 extern double cm_per_pixel;
+extern int Navi_Des_X;
+extern int Navi_Des_Y;
 
 extern QString selectedMapPath;
 extern Packet * packetshm;
 
+extern int map[7][16];
+extern int Des_I;
+extern int Des_J;
+extern int Src_I;
+extern int Src_J;
+extern int min;
+struct st
+{
+    int i, j;
+};
+extern struct st route[1000000];
+extern int ans[35][75];
+extern int chk[35][75];
 
 extern void KalmanPredictUpdate1D(SKalman1D *kalman, double NewData);
 extern void _solve_line(_circle c1, _circle c2, _line * l);
@@ -28,7 +44,9 @@ extern void _solve_dot(_line l1, _line l2, _dot * d);
 extern void _solve_position(_circle * circle, _dot * ans);
 extern void _solve_position(_circle * circle, _dot * ans);
 extern double _rssi_to_dist(double rssi);
+extern void DFS(int I, int J, int n);
 
+int ellipseChk;
 
 MOVING::MOVING(QWidget *parent) :
     QDialog(parent),totalScaleFactor(1),
@@ -57,13 +75,14 @@ MOVING::MOVING(QWidget *parent) :
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(shmchk()));
     timer->start(1280);
+    ellipseChk = 0;
 }
 
 void MOVING::shmchk(void)
 {
    if(packetshm != NULL)
    {
-
+/*
        qDebug("[pi0] %f", (signed int)packetshm[0].rssi - 256.0  );
        qDebug("[pi1] %f", (signed int)packetshm[1].rssi - 256.0  );
        qDebug("[pi2] %f", (signed int)packetshm[2].rssi - 256.0  );
@@ -99,9 +118,11 @@ void MOVING::shmchk(void)
 
        _solve_position(c, &predicted_dot);
 
-       predicted_dot.x = predicted_dot.x*100/cm_per_pixel;
-       predicted_dot.y = predicted_dot.y*100/cm_per_pixel;
-
+//       predicted_dot.x = predicted_dot.x*100/cm_per_pixel;
+//       predicted_dot.y = predicted_dot.y*100/cm_per_pixel;
+       */
+       predicted_dot.x = 100;
+       predicted_dot.y = 100;
        if (predicted_dot.x < 10.0 ) predicted_dot.x = 10.0;
        else if (predicted_dot.x > 740.0 ) predicted_dot.x = 740.0;
        if (predicted_dot.y < 10.0 ) predicted_dot.y = 10.0;
@@ -124,10 +145,35 @@ void MOVING::mousePressEvent(QMouseEvent *event)
     qDebug() << "pressed";
     Pressed=true;
     update();
+    int mx, my;
     mx = event->pos().x();
     my = event->pos().y();
     qDebug() << mx;
     qDebug() << my;
+    if(!ui->checkBox->isChecked()) return;
+    if(mx <= 0 || mx >= 750 || my <= 70 || my >= 420) {
+        qDebug() << "out";
+        return;
+    }
+    qDebug("run. (%d,%d)", mx, my);
+    if(!ellipseChk)
+    {
+        ellipseChk = 1;
+        QBrush redBrush(Qt::red);
+        QPen blackPen(Qt::black);
+        ellipseDst = scene.addEllipse(mx-15, my-15, 15, 15, blackPen, redBrush);
+    }
+    else
+    {
+        ellipseDst->setRect(QRectF(0, 0, 15, 15));
+        ellipseDst->setPos(mx-15, my-15);
+    }
+    Des_I = (my / 10) - 7;
+    Des_J = (mx / 10);
+    Src_I = predicted_dot.y / 10 - 7;
+    Src_J = predicted_dot.x / 10;
+    qDebug("Des_I, Des_J, Src_I, Src_J : %d %d %d %d", Des_I, Des_J, Src_I, Src_J);
+    DFS(Src_I, Src_J, 0);
 }
 
 void MOVING::mouseMoveEvent(QMouseEvent * event)
@@ -137,8 +183,8 @@ void MOVING::mouseMoveEvent(QMouseEvent * event)
 //    ui->graphicsView->move(event->globalX()-mx,event->globalY()-my);
     //translate(event->globalX()-mx,event->globalY()-my);
 
-    qDebug() << event->globalX();
-    qDebug() << event->globalY();
+//    qDebug() << event->globalX();
+//    qDebug() << event->globalY();
 }
 
 void MOVING::mouseReleaseEvent(QMouseEvent *event)
@@ -167,4 +213,42 @@ void MOVING::on_horizontalSlider_sliderMoved(int value)
 void MOVING::on_pushButton_clicked()
 {
     close();
+}
+
+void MOVING::on_pushButton_2_clicked()
+{
+    //coloring path
+    int k = 0;
+
+    for(int i = 0; i < 35; i++)
+    {
+        for(int j = 0; j < 75; j++)
+        {
+  //         qDebug("%d", ans[i][j]);
+           printf("%d", ans[i][j]);
+        }
+//        qDebug("\n");
+        printf("\n");
+    }
+
+    for(int i = 0; i < 35; i++)
+    {
+        for(int j = 0; j < 75; j++)
+        {
+           if(ans[i][j])
+           {
+               QBrush blueBrush(Qt::blue);
+               QPen bluePen(Qt::blue);
+               rectangle[k] = scene.addRect(j * 10, i * 10, 10, 10, bluePen, blueBrush);
+               k++;
+           }
+        }
+    }
+}
+
+void MOVING::on_checkBox_clicked()
+{
+    QMessageBox msgBox;
+    msgBox.setText("Touch Destination Point.");
+    msgBox.exec();
 }

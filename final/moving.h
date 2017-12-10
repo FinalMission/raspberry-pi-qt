@@ -29,6 +29,9 @@ public:
   //  bool viewportEvent(QEvent *event);
      Ui::MOVING *ui;
     QGraphicsScene scene;
+    QGraphicsEllipseItem * ellipse;
+    QGraphicsEllipseItem * ellipseDst;
+    QGraphicsRectItem * rectangle[50];
 public slots:
     void shmchk(void);
 
@@ -38,10 +41,11 @@ private slots:
 
    void on_pushButton_clicked();
 
+   void on_pushButton_2_clicked();
+
+   void on_checkBox_clicked();
+
 private:
-
-
-    QGraphicsEllipseItem *ellipse;
     bool Pressed;
     qreal totalScaleFactor;
     double beforeZoom;

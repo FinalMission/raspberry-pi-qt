@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHeaderView>
@@ -27,6 +28,8 @@ public:
     QGraphicsView *graphicsView;
     QSlider *horizontalSlider;
     QPushButton *pushButton;
+    QPushButton *pushButton_2;
+    QCheckBox *checkBox;
 
     void setupUi(QDialog *MOVING)
     {
@@ -42,10 +45,18 @@ public:
         horizontalSlider->setOrientation(Qt::Horizontal);
         pushButton = new QPushButton(MOVING);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(760, 0, 30, 30));
+        pushButton->setGeometry(QRect(769, 0, 30, 30));
+        pushButton_2 = new QPushButton(MOVING);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setGeometry(QRect(120, 430, 91, 29));
+        checkBox = new QCheckBox(MOVING);
+        checkBox->setObjectName(QStringLiteral("checkBox"));
+        checkBox->setGeometry(QRect(10, 430, 101, 27));
         graphicsView->raise();
         pushButton->raise();
         horizontalSlider->raise();
+        pushButton_2->raise();
+        checkBox->raise();
 
         retranslateUi(MOVING);
 
@@ -56,6 +67,8 @@ public:
     {
         MOVING->setWindowTitle(QApplication::translate("MOVING", "Dialog", Q_NULLPTR));
         pushButton->setText(QApplication::translate("MOVING", "X", Q_NULLPTR));
+        pushButton_2->setText(QApplication::translate("MOVING", "Navi Start", Q_NULLPTR));
+        checkBox->setText(QApplication::translate("MOVING", "Navi Mode", Q_NULLPTR));
     } // retranslateUi
 
 };

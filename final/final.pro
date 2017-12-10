@@ -43,3 +43,6 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += \
     MyResources.qrc
+
+DISTFILES += \
+    mapdata.txt
