@@ -100,7 +100,7 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
             QBrush redBrush(Qt::red);
             QPen blackPen(Qt::black);
             qDebug() << "before ellipse0";
-            ellipse0 = scene.addEllipse(mx-15, my-15, 15, 15, blackPen, redBrush);
+            ellipse0 = scene.addEllipse(mx, my, 15, 15, blackPen, redBrush);
             qDebug() << "after ellipse0" << ellipse0;
             ui->zero_x->setText(QString::number(mx));
             ui->zero_y->setText(QString::number(my));
@@ -109,7 +109,7 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
         {
             qDebug() << "else";
             ellipse0->setRect(QRectF(0, 0, 15, 15));
-            ellipse0->setPos(mx-15, my-15);
+            ellipse0->setPos(mx, my);
             ui->zero_x->setText(QString::number(mx));
             ui->zero_y->setText(QString::number(my));
         }
@@ -123,7 +123,7 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
             chkEllipse[1] = 1;
             QBrush blueBrush(Qt::blue);
             QPen blackPen(Qt::black);
-            ellipse1 = scene.addEllipse(mx-15, my-15, 15, 15, blackPen, blueBrush);
+            ellipse1 = scene.addEllipse(mx, my, 15, 15, blackPen, blueBrush);
             qDebug() << "ellipse1 "<<  ellipse1;
             ui->one_x->setText(QString::number(mx));
             ui->one_y->setText(QString::number(my));
@@ -132,7 +132,7 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
         {
              qDebug() << "else ellipse1 "<<  ellipse1;
              ellipse1->setRect(QRectF(0, 0, 15, 15));
-             ellipse1->setPos(mx-15, my-15);
+             ellipse1->setPos(mx, my);
              ui->one_x->setText(QString::number(mx));
              ui->one_y->setText(QString::number(my));
         }
@@ -146,14 +146,14 @@ void bluetoothSetting::mousePressEvent(QMouseEvent *event)
             chkEllipse[2] = 1;
             QBrush greenBrush(Qt::green);
             QPen blackPen(Qt::black);
-            ellipse2 = scene.addEllipse(mx-15, my-15, 15, 15, blackPen, greenBrush);
+            ellipse2 = scene.addEllipse(mx, my, 15, 15, blackPen, greenBrush);
             ui->two_x->setText(QString::number(mx));
             ui->two_y->setText(QString::number(my));
         }
         else
         {
             ellipse2->setRect(QRectF(0, 0, 15, 15));
-            ellipse2->setPos(mx-15, my-15);
+            ellipse2->setPos(mx, my);
             ui->two_x->setText(QString::number(mx));
             ui->two_y->setText(QString::number(my));
         }

@@ -33,54 +33,16 @@ int chk[V_LEN][H_LEN];
 int map[V_LEN][H_LEN];
 int ans[V_LEN][H_LEN];
 int dir[4][2] = { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
-/*int map[7][16] = { {1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1 },
-{ 1, 1,	1,	1,	1,	0,	1,	0,	0,	1,	0,	0,	1,	0,	0,	1 },
-{ 1, 0,	0,	1,	0,	0,	1,	0,	0,	1,	0,	0,	1,	0,	0,	1 },
-{ 1, 0,	0,	1,	0,	0,	1,	0,	0,	1,	0,	0,	1,	0,	0,	1 },
-{ 1, 1,	0,	1,	1,	0,	1,	0,	0,	0,	0,	1,	0,	0,	0,	1 },
-{ 1, 1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1 },
-{ 1, 1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0,	1 }};
-*/
-/*
-struct st
-{
-    int i, j, parentqnum, d;
-};
-*/
-/*
-int Des_I;
-int Des_J;
-int Src_I;
-int Src_J;
-int min = 1000;
-*/
-/*
-struct st route[QUE];
-int chk[35][75];
-int map[35][75];
-*/
-/*
-struct st
-{
-    int i, j;
-};
-struct st route[1000000];
-int ans[35][75];
-int chk[35][75];
-int map[35][75];
-*/
+
 
 _circle c[3];
 _dot predicted_dot;
-SKalman1D kalman_filter[3] = {{-59,0.01,0.01,3},{-59,0.01,0.01,3},{-59,0.01,0.01,3}};
+SKalman1D kalman_filter[3] = {{-59,0.01,0.01,1},{-59,0.01,0.01,1},{-59,0.01,0.01,1}};
 signed int device_x_pos[3] = {100,100,100};
 signed int device_y_pos[3] = {100,100,100};
-signed int tx_power[3] = {-54, -59, -59};
+signed int tx_power[3] = {-59, -59, -59};
 double cm_per_pixel = 5.8030;
 
-//double PiZero_X_value;
-//double PiOneCaseO_X_value;
-//double PiOneCaseX_X_value;
 
 void KalmanPredictUpdate1D(SKalman1D *kalman, double NewData);
 void _solve_line(_circle c1, _circle c2, _line * l);
@@ -95,62 +57,25 @@ void CheckPath(void);
 
 void injectMapData()
 {
-    qDebug() << "inject";
+    //qDebug() << "inject";
     QFile file("/home/pi/workspace/raspberry-pi-qt/final/mapdata.txt");
     if (file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         int k = 0;
-        qDebug() << "start";
+        //qDebug() << "start";
         QTextStream stream(&file);
         QString dataString = stream.readAll();
         QChar * start = dataString.begin();
         QChar * end = dataString.end();
-        qDebug() << start << ", " << end;
-        qDebug() << *dataString.begin();
+        //qDebug() << start << ", " << end;
+        //qDebug() << *dataString.begin();
 
         for(; start != end ; ++start) {
-            qDebug() << (*start).digitValue();
+            //qDebug() << (*start).digitValue();
             if((*start).digitValue() == -1) continue;
             map[k/75][k%75] = (*start).digitValue();
             k++;
         }
-
-        qDebug() << "end";
-        //        int k = 0;
-//        QString line = stream.readAll();
-//        QChar * data = line.data();
-//        while(!data->isNull()){
-//            qDebug() << data->unicode();
-//            data++;
-//        }
-    //    line.data()
-    //    const char * tmp = line.toStdString().c_str();
-    //    printf("start!\n");
-    //    while(k != 35 * 75)
-    //    {
-    ////        map[k/75][k%75] = tmp[k] - '0';
-    //        printf("%c\n", tmp[k]);
-    //        k++;
-    //    }
-    //    printf("end!\n");
-
-     //   ::freopen("mapdata.txt", "r", stdin);
-    /*    for(int i = 0; i < 35; i++)
-        {
-            for(int j = 0; j < 75; j++)
-            {
-                //map[i][j] = list[i * 75 + j].toInt();
-                scanf("%d", &map[i][j]);
-            }
-        }*/
-
-//        for(int i = 0; i < 35; i++)
-//        {
-//            for(int j = 0; j < 75; j++)
-//            {
-//                printf("%d", map[i][j]);
-//            }
-//        }
         file.close();
     }
 }
@@ -158,7 +83,7 @@ void injectMapData()
 
 int main(int argc, char *argv[])
 {
-
+    qDebug() << "sfdgljksdfghlkdfsghdsfkjghjdfk/;";
     pid_temp = fork();
     if (pid_temp == 0) {
         execlp("sudo", "sudo", "/home/pi/workspace/raspberrypi-bluetooth/bin/scan", NULL);
@@ -172,60 +97,6 @@ int main(int argc, char *argv[])
     return a.exec();
 }
 
-/*
-void PathFind(int I, int J, int n)
-{
-    if (I > 34 || I < 0 || J > 74 || J < 0) return;
-    if (n > min) return;
-
-    chk[I][J] = 1;
-    route[n].i = I;
-    route[n].j = J;
-
-    if (I == Des_I && J == Des_J)
-    {
-        memset(ans, 0, sizeof(ans));
-        min = n;
-        for (int i = 0; i <= n; i++)
-        {
-            ans[route[i].i][route[i].j] = 1;
-        }
-        return;
-    }
-
-
-    if (map[I - 1][J] == 1 && chk[I - 1][J] == 0)
-    {
-        PathFind(I - 1, J, n + 1);
-        chk[I - 1][J] = 0;
-        route[n + 1].i = 0;
-        route[n + 1].j = 0;
-    }
-    if (map[I][J + 1] == 1 && chk[I][J + 1] == 0)
-    {
-        PathFind(I, J + 1, n + 1);
-        chk[I][J + 1] = 0;
-        route[n + 1].i = 0;
-        route[n + 1].j = 0;
-    }
-    if (map[I + 1][J] == 1 && chk[I + 1][J] == 0)
-    {
-        PathFind(I + 1, J, n + 1);
-        chk[I + 1][J] = 0;
-        route[n + 1].i = 0;
-        route[n + 1].j = 0;
-    }
-    if (map[I][J - 1] == 1 && chk[I][J - 1] == 0)
-    {
-        PathFind(I, J - 1, n + 1);
-        chk[I][J - 1] = 0;
-        route[n + 1].i = 0;
-        route[n + 1].j = 0;
-    }
-
-
-}
-*/
 
 void CheckPath(void) {
     if (last == -1) return;
@@ -332,7 +203,6 @@ void _solve_position(_circle * circle, _dot * ans) {
 }
 
 double _rssi_to_dist(double rssi) {
-    //return 10.0;
     return pow( 10.0,( (-59.0-rssi)/20.0) );
 }
 

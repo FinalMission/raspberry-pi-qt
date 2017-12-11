@@ -86,10 +86,10 @@ public:
         bluetoothSetting->resize(781, 505);
         graphicsView = new QGraphicsView(bluetoothSetting);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
-        graphicsView->setGeometry(QRect(0, 1, 770, 370));
+        graphicsView->setGeometry(QRect(0, 1, 750, 351));
         verticalLayoutWidget = new QWidget(bluetoothSetting);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(6, 380, 91, 122));
+        verticalLayoutWidget->setGeometry(QRect(6, 360, 91, 122));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
@@ -118,7 +118,7 @@ public:
 
         gridLayoutWidget_2 = new QWidget(bluetoothSetting);
         gridLayoutWidget_2->setObjectName(QStringLiteral("gridLayoutWidget_2"));
-        gridLayoutWidget_2->setGeometry(QRect(226, 380, 531, 121));
+        gridLayoutWidget_2->setGeometry(QRect(226, 360, 531, 121));
         gridLayout_3 = new QGridLayout(gridLayoutWidget_2);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         gridLayout_3->setContentsMargins(0, 0, 0, 0);
@@ -295,7 +295,7 @@ public:
 
         gridLayoutWidget_3 = new QWidget(bluetoothSetting);
         gridLayoutWidget_3->setObjectName(QStringLiteral("gridLayoutWidget_3"));
-        gridLayoutWidget_3->setGeometry(QRect(106, 380, 111, 121));
+        gridLayoutWidget_3->setGeometry(QRect(104, 360, 111, 121));
         gridLayout_4 = new QGridLayout(gridLayoutWidget_3);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
         gridLayout_4->setContentsMargins(0, 0, 0, 0);

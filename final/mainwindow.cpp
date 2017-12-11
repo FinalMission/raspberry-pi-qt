@@ -15,18 +15,20 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    id_shm = shmget((key_t)KEY_SHM, sizeof(Packet[3]), 0777);
-    if(id_shm == ERROR)
+    id_shm = shmget((key_t)KEY_SHM, sizeof(Packet[3]), 0777|IPC_CREAT);
+    packetshm = (Packet *)shmat(id_shm, (void *)0, 0);
+
+    /*if(id_shm == ERROR)
     {
-  //      printf("error: %s (%d)\n", strerror(errno), __LINE__);
+        printf("error: %s (%d)\n", strerror(errno), __LINE__);
         //return EXIT_FAILURE;
     }
-    packetshm = (Packet *)shmat(id_shm, (void *)0, 0);
-    if(packetshm == (Packet *)ERROR)
+    */
+    /*if(packetshm == (Packet *)ERROR)
     {
         printf("attach shared memory error: %s (%d)\n", strerror(errno), __LINE__);
         //return EXIT_FAILURE;
-    }
+    }*/
 
   ui->setupUi(this);
 
@@ -53,17 +55,12 @@ MainWindow::~MainWindow()
 {
     qDebug() <<"des called";
     ret = shmdt(packetshm);
+    /*
     if(ret == ERROR)
     {
         printf("detach shared memory error: %s (%d)\n", strerror(errno), __LINE__);
         //return EXIT_FAILURE;
     }
+    */
 }
 
-/*void MainWindow::on_pushButton_clicked()
-{
-    MOVING dlg;
-    //dlg.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "MOVING GUI PROTOTYPE"));
-    dlg.setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    dlg.exec();
-}*/
