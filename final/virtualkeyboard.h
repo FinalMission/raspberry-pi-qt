@@ -43,6 +43,8 @@ private slots:
 
     void on_DoneButton_clicked();
 
+    void on_Minus_clicked();
+
 private:
     Ui::VirtualKeyboard *ui;
 };

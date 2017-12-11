@@ -104,3 +104,9 @@ void VirtualKeyboard::on_DoneButton_clicked()
 {
     close();
 }
+
+void VirtualKeyboard::on_Minus_clicked()
+{
+    value[char_count++] = '-';
+    ui->TypedText->setText(value);
+}

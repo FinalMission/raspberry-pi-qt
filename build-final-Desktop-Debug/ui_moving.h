@@ -30,6 +30,8 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_2;
     QCheckBox *checkBox;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_4;
 
     void setupUi(QDialog *MOVING)
     {
@@ -52,11 +54,19 @@ public:
         checkBox = new QCheckBox(MOVING);
         checkBox->setObjectName(QStringLiteral("checkBox"));
         checkBox->setGeometry(QRect(10, 430, 101, 27));
+        pushButton_3 = new QPushButton(MOVING);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        pushButton_3->setGeometry(QRect(230, 430, 91, 29));
+        pushButton_4 = new QPushButton(MOVING);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+        pushButton_4->setGeometry(QRect(340, 430, 91, 29));
         graphicsView->raise();
         pushButton->raise();
         horizontalSlider->raise();
         pushButton_2->raise();
         checkBox->raise();
+        pushButton_3->raise();
+        pushButton_4->raise();
 
         retranslateUi(MOVING);
 
@@ -69,6 +79,8 @@ public:
         pushButton->setText(QApplication::translate("MOVING", "X", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MOVING", "Navi Start", Q_NULLPTR));
         checkBox->setText(QApplication::translate("MOVING", "Navi Mode", Q_NULLPTR));
+        pushButton_3->setText(QApplication::translate("MOVING", "Emergency", Q_NULLPTR));
+        pushButton_4->setText(QApplication::translate("MOVING", "Erase", Q_NULLPTR));
     } // retranslateUi
 
 };

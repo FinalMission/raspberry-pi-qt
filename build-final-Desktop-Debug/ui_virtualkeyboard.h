@@ -30,18 +30,19 @@ public:
     QPushButton *Five;
     QPushButton *Nine;
     QPushButton *One;
-    QPushButton *Zero;
     QPushButton *Seven;
     QPushButton *Three;
     QPushButton *Six;
     QPushButton *Four;
     QPushButton *Two;
     QPushButton *Eight;
+    QPushButton *Minus;
+    QPushButton *Zero;
     QPushButton *Dot;
-    QPushButton *Backspace;
     QLabel *label;
     QLabel *TypedText;
     QPushButton *DoneButton;
+    QPushButton *Backspace;
 
     void setupUi(QDialog *VirtualKeyboard)
     {
@@ -50,7 +51,7 @@ public:
         VirtualKeyboard->resize(496, 264);
         gridLayoutWidget = new QWidget(VirtualKeyboard);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(170, 10, 311, 231));
+        gridLayoutWidget->setGeometry(QRect(180, 10, 311, 231));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
@@ -77,13 +78,6 @@ public:
         One->setSizePolicy(sizePolicy);
 
         gridLayout->addWidget(One, 0, 0, 1, 1);
-
-        Zero = new QPushButton(gridLayoutWidget);
-        Zero->setObjectName(QStringLiteral("Zero"));
-        sizePolicy.setHeightForWidth(Zero->sizePolicy().hasHeightForWidth());
-        Zero->setSizePolicy(sizePolicy);
-
-        gridLayout->addWidget(Zero, 3, 0, 1, 1);
 
         Seven = new QPushButton(gridLayoutWidget);
         Seven->setObjectName(QStringLiteral("Seven"));
@@ -127,22 +121,32 @@ public:
 
         gridLayout->addWidget(Eight, 2, 1, 1, 1);
 
+        Minus = new QPushButton(gridLayoutWidget);
+        Minus->setObjectName(QStringLiteral("Minus"));
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(Minus->sizePolicy().hasHeightForWidth());
+        Minus->setSizePolicy(sizePolicy1);
+        Minus->setMaximumSize(QSize(100, 61));
+
+        gridLayout->addWidget(Minus, 3, 2, 1, 1);
+
+        Zero = new QPushButton(gridLayoutWidget);
+        Zero->setObjectName(QStringLiteral("Zero"));
+        sizePolicy.setHeightForWidth(Zero->sizePolicy().hasHeightForWidth());
+        Zero->setSizePolicy(sizePolicy);
+        Zero->setMaximumSize(QSize(100, 16777215));
+
+        gridLayout->addWidget(Zero, 3, 1, 1, 1);
+
         Dot = new QPushButton(gridLayoutWidget);
         Dot->setObjectName(QStringLiteral("Dot"));
         sizePolicy.setHeightForWidth(Dot->sizePolicy().hasHeightForWidth());
         Dot->setSizePolicy(sizePolicy);
+        Dot->setMaximumSize(QSize(100, 16777215));
 
-        gridLayout->addWidget(Dot, 3, 1, 1, 1);
-
-        Backspace = new QPushButton(gridLayoutWidget);
-        Backspace->setObjectName(QStringLiteral("Backspace"));
-        QSizePolicy sizePolicy1(QSizePolicy::Ignored, QSizePolicy::Ignored);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(Backspace->sizePolicy().hasHeightForWidth());
-        Backspace->setSizePolicy(sizePolicy1);
-
-        gridLayout->addWidget(Backspace, 3, 2, 1, 1);
+        gridLayout->addWidget(Dot, 3, 0, 1, 1);
 
         label = new QLabel(VirtualKeyboard);
         label->setObjectName(QStringLiteral("label"));
@@ -153,6 +157,14 @@ public:
         DoneButton = new QPushButton(VirtualKeyboard);
         DoneButton->setObjectName(QStringLiteral("DoneButton"));
         DoneButton->setGeometry(QRect(20, 190, 111, 51));
+        Backspace = new QPushButton(VirtualKeyboard);
+        Backspace->setObjectName(QStringLiteral("Backspace"));
+        Backspace->setGeometry(QRect(20, 130, 111, 53));
+        QSizePolicy sizePolicy2(QSizePolicy::Ignored, QSizePolicy::Ignored);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(Backspace->sizePolicy().hasHeightForWidth());
+        Backspace->setSizePolicy(sizePolicy2);
 
         retranslateUi(VirtualKeyboard);
 
@@ -165,18 +177,19 @@ public:
         Five->setText(QApplication::translate("VirtualKeyboard", "5", Q_NULLPTR));
         Nine->setText(QApplication::translate("VirtualKeyboard", "9", Q_NULLPTR));
         One->setText(QApplication::translate("VirtualKeyboard", "1", Q_NULLPTR));
-        Zero->setText(QApplication::translate("VirtualKeyboard", "0", Q_NULLPTR));
         Seven->setText(QApplication::translate("VirtualKeyboard", "7", Q_NULLPTR));
         Three->setText(QApplication::translate("VirtualKeyboard", "3", Q_NULLPTR));
         Six->setText(QApplication::translate("VirtualKeyboard", "6", Q_NULLPTR));
         Four->setText(QApplication::translate("VirtualKeyboard", "4", Q_NULLPTR));
         Two->setText(QApplication::translate("VirtualKeyboard", "2", Q_NULLPTR));
         Eight->setText(QApplication::translate("VirtualKeyboard", "8", Q_NULLPTR));
+        Minus->setText(QApplication::translate("VirtualKeyboard", "minus(-)", Q_NULLPTR));
+        Zero->setText(QApplication::translate("VirtualKeyboard", "0", Q_NULLPTR));
         Dot->setText(QApplication::translate("VirtualKeyboard", ".", Q_NULLPTR));
-        Backspace->setText(QApplication::translate("VirtualKeyboard", "Backspace", Q_NULLPTR));
         label->setText(QApplication::translate("VirtualKeyboard", "You Typed in:", Q_NULLPTR));
         TypedText->setText(QString());
         DoneButton->setText(QApplication::translate("VirtualKeyboard", "Done", Q_NULLPTR));
+        Backspace->setText(QApplication::translate("VirtualKeyboard", "Backspace", Q_NULLPTR));
     } // retranslateUi
 
 };

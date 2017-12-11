@@ -13,6 +13,8 @@
 #include "mapsettings.h"
 #include "ui_mapsettings.h"
 #include <QMessageBox>
+#include <QGraphicsItem>
+
 
 extern _circle c[3];
 extern _dot predicted_dot;
@@ -47,6 +49,7 @@ extern void FindDst(void);
 extern void CheckPath(void);
 
 int ellipseChk;
+int ellipseDstChk;
 
 MOVING::MOVING(QWidget *parent) :
     QDialog(parent),totalScaleFactor(1),
@@ -76,6 +79,7 @@ MOVING::MOVING(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(shmchk()));
     timer->start(1280);
     ellipseChk = 0;
+    ellipseDstChk = 0;
 }
 
 void MOVING::shmchk(void)
@@ -89,7 +93,7 @@ qDebug() << "changed?";
        KalmanPredictUpdate1D(&kalman_filter[1], (signed int)packetshm[1].rssi - 256.0 );
        KalmanPredictUpdate1D(&kalman_filter[2], (signed int)packetshm[2].rssi - 256.0 );
 
-       /*
+/*
        qDebug("[pi0] %f", (signed int)packetshm[0].rssi - 256.0  );
        qDebug("[pi1] %f", (signed int)packetshm[1].rssi - 256.0  );
        qDebug("[pi2] %f", (signed int)packetshm[2].rssi - 256.0  );
@@ -97,24 +101,25 @@ qDebug() << "changed?";
        qDebug("rssi 0 = %f",  kalman_filter[0].X);
        qDebug("rssi 1 = %f",  kalman_filter[1].X);
        qDebug("rssi 2 = %f",  kalman_filter[2].X);
-
+*/
        qDebug("dist 0 = %f",  _rssi_to_dist(kalman_filter[0].X));
        qDebug("dist 1 = %f",  _rssi_to_dist(kalman_filter[1].X));
        qDebug("dist 2 = %f",  _rssi_to_dist(kalman_filter[2].X));
-*/
 
-       c[0].a = device_x_pos[0]*cm_per_pixel/100.0;
-       c[1].a = device_x_pos[1]*cm_per_pixel/100.0;
-       c[2].a = device_x_pos[2]*cm_per_pixel/100.0;
 
-       c[0].b = device_y_pos[0]*cm_per_pixel/100.0;
-       c[1].b = device_y_pos[1]*cm_per_pixel/100.0;
-       c[2].b = device_y_pos[2]*cm_per_pixel/100.0;
+       //c[0].a = device_x_pos[0]*cm_per_pixel/100.0;
+       c[0].a = device_x_pos[0];
+       c[1].a = device_x_pos[1];
+       c[2].a = device_x_pos[2];
+
+       c[0].b = device_y_pos[0];
+       c[1].b = device_y_pos[1];
+       c[2].b = device_y_pos[2];
 
        //
-       c[0].k = _rssi_to_dist(kalman_filter[0].X);
-       c[1].k = _rssi_to_dist(kalman_filter[1].X);
-       c[2].k = _rssi_to_dist(kalman_filter[2].X);
+       c[0].k = _rssi_to_dist(kalman_filter[0].X)*100.0/cm_per_pixel;
+       c[1].k = _rssi_to_dist(kalman_filter[1].X)*100.0/cm_per_pixel;
+       c[2].k = _rssi_to_dist(kalman_filter[2].X)*100.0/cm_per_pixel;
 
        qDebug("(%.2f,%.2f,,%.2f), (%.2f,%.2f,,%.2f), (%.2f,%.2f,,%.2f) ",
               c[0].a, c[0].b, c[0].k,
@@ -124,9 +129,9 @@ qDebug() << "changed?";
 
        _solve_position(c, &predicted_dot);
 
-       predicted_dot.x = predicted_dot.x*100/cm_per_pixel;
-       predicted_dot.y = predicted_dot.y*100/cm_per_pixel;
-
+       //predicted_dot.x = predicted_dot.x*100/cm_per_pixel;
+       predicted_dot.x = predicted_dot.x;
+       predicted_dot.y = predicted_dot.y;
 
        qDebug("now new position is ... x = %d  y = %d", (signed int)predicted_dot.x, (signed int)predicted_dot.y);
 
@@ -171,6 +176,7 @@ void MOVING::mousePressEvent(QMouseEvent *event)
         QBrush redBrush(Qt::red);
         QPen blackPen(Qt::black);
         ellipseDst = scene.addEllipse(mx - 30 , my- 70, 15, 15, blackPen, redBrush);
+        ellipseDstChk = 1;
     }
     else
     {
@@ -259,9 +265,33 @@ void MOVING::on_pushButton_2_clicked()
     }
 }
 
-void MOVING::on_checkBox_clicked()
+
+void MOVING::on_checkBox_clicked(bool checked)
 {
-    QMessageBox msgBox;
-    msgBox.setText("Touch Destination Point.");
-    msgBox.exec();
+    if(checked == true)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Touch Destination Point.");
+        msgBox.exec();
+    }
+}
+
+void MOVING::on_pushButton_3_clicked()
+{
+    Des_I = 31;
+    Des_J = 26;
+    Src_I = (predicted_dot.y) / 10;
+    Src_J = (predicted_dot.x) / 10;
+    ui->pushButton_2->clicked();
+    Des_I = 31;
+    Des_J = 47;
+    ui->pushButton_2->clicked();
+}
+
+void MOVING::on_pushButton_4_clicked()
+{
+    QPixmap pix(selectedMapPath);
+    scene.addPixmap(pix);
+    ellipse->setZValue(1);
+    if(ellipseDstChk) ellipseDst->setZValue(1);
 }

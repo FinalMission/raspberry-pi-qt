@@ -1,3 +1,4 @@
+
 #define H_LEN 75
 #define V_LEN 35
 #define QUE 2000
@@ -176,6 +177,15 @@ void KalmanPredictUpdate1D(SKalman1D* Kalman, double NewData)
 }
 
 void _solve_line(_circle c1, _circle c2, _line * l) {
+    double temp_dist = sqrt((c1.a-c2.a)*(c1.a-c2.a)+(c1.b-c2.b)*(c1.b-c2.b));
+
+    if ( (c1.k+c2.k) < temp_dist ) {
+        temp_dist = temp_dist / (c1.k+c2.k);
+        temp_dist *= 1.1;
+        c1.k *= temp_dist;
+        c2.k *= temp_dist;
+    }
+
     l->a = -2 * (c1.a - c2.a);
     l->b = -2 * (c1.b - c2.b);
     l->k = (c1.k*c1.k - c2.k*c2.k) - (c1.a*c1.a - c2.a*c2.a) - (c1.b*c1.b - c2.b*c2.b);

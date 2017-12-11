@@ -60,7 +60,7 @@ void mapsettings::on_SettingButton_clicked()
     dlg.exec();
     dlg.GetString(ValueCharString);
     double value = atof(ValueCharString);
-    cm_per_pixel = value;
+    if(value != 0) cm_per_pixel = value;
     qDebug() << "atof: " << value;
     qDebug() << "ValueCharString: " << ValueCharString;
     ui->CurrentRatio->setText(QString::number(cm_per_pixel));
