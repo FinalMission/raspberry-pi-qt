@@ -31,7 +31,7 @@ public:
     QGraphicsScene scene;
     QGraphicsEllipseItem * ellipse;
     QGraphicsEllipseItem * ellipseDst;
-    QGraphicsRectItem * rectangle[50];
+    QGraphicsRectItem * rectangle[100000];
 public slots:
     void shmchk(void);
 

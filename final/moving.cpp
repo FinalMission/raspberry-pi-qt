@@ -1,3 +1,6 @@
+#define H_LEN 75
+#define V_LEN 35
+#define QUE 2000
 #include "moving.h"
 #include "ui_moving.h"
 #include <QScrollBar>
@@ -24,19 +27,14 @@ extern int Navi_Des_Y;
 extern QString selectedMapPath;
 extern Packet * packetshm;
 
-extern int map[7][16];
-extern int Des_I;
-extern int Des_J;
-extern int Src_I;
-extern int Src_J;
-extern int min;
-struct st
-{
-    int i, j;
-};
-extern struct st route[1000000];
-extern int ans[35][75];
-extern int chk[35][75];
+extern int Des_I, Des_J, Src_I, Src_J;
+extern int wp, rp, last;
+
+extern struct st route[QUE];
+extern int chk[V_LEN][H_LEN];
+extern int map[V_LEN][H_LEN];
+extern int ans[V_LEN][H_LEN];
+extern int dir[4][2];
 
 extern void KalmanPredictUpdate1D(SKalman1D *kalman, double NewData);
 extern void _solve_line(_circle c1, _circle c2, _line * l);
@@ -44,7 +42,9 @@ extern void _solve_dot(_line l1, _line l2, _dot * d);
 extern void _solve_position(_circle * circle, _dot * ans);
 extern void _solve_position(_circle * circle, _dot * ans);
 extern double _rssi_to_dist(double rssi);
-extern void DFS(int I, int J, int n);
+extern void PathFind(int I, int J, int n);
+extern void FindDst(void);
+extern void CheckPath(void);
 
 int ellipseChk;
 
@@ -122,13 +122,14 @@ void MOVING::shmchk(void)
 //       predicted_dot.y = predicted_dot.y*100/cm_per_pixel;
        */
        predicted_dot.x = 100;
-       predicted_dot.y = 100;
+       predicted_dot.y = 250;
        if (predicted_dot.x < 10.0 ) predicted_dot.x = 10.0;
        else if (predicted_dot.x > 740.0 ) predicted_dot.x = 740.0;
        if (predicted_dot.y < 10.0 ) predicted_dot.y = 10.0;
        else if (predicted_dot.x > 740.0 ) predicted_dot.x = 740.0;
 
 //       qDebug("now new position is ... x = %d  y = %d", (signed int)predicted_dot.x, (signed int)predicted_dot.y);
+       ellipse->setRect(QRectF(-30, -70, 15, 15));
        ellipse->setPos((signed int)predicted_dot.x,(signed int)predicted_dot.y);
 
    }
@@ -151,7 +152,7 @@ void MOVING::mousePressEvent(QMouseEvent *event)
     qDebug() << mx;
     qDebug() << my;
     if(!ui->checkBox->isChecked()) return;
-    if(mx <= 0 || mx >= 750 || my <= 70 || my >= 420) {
+    if(mx <= 25 || mx >= 775 || my < 65 || my > 415) {
         qDebug() << "out";
         return;
     }
@@ -161,19 +162,24 @@ void MOVING::mousePressEvent(QMouseEvent *event)
         ellipseChk = 1;
         QBrush redBrush(Qt::red);
         QPen blackPen(Qt::black);
-        ellipseDst = scene.addEllipse(mx-15, my-15, 15, 15, blackPen, redBrush);
+        ellipseDst = scene.addEllipse(mx - 30, my - 70, 15, 15, blackPen, redBrush);
     }
     else
     {
-        ellipseDst->setRect(QRectF(0, 0, 15, 15));
-        ellipseDst->setPos(mx-15, my-15);
+        ellipseDst->setRect(QRectF(-30, -70, 15, 15));
+        ellipseDst->setPos(mx, my);
     }
-    Des_I = (my / 10) - 7;
-    Des_J = (mx / 10);
-    Src_I = predicted_dot.y / 10 - 7;
-    Src_J = predicted_dot.x / 10;
+    Des_I = (my - 65) / 10;
+    Des_J = (mx - 25) / 10;
+    Src_I = (predicted_dot.y - 65)/ 10;
+    Src_J = (predicted_dot.x - 25) / 10;
     qDebug("Des_I, Des_J, Src_I, Src_J : %d %d %d %d", Des_I, Des_J, Src_I, Src_J);
-    DFS(Src_I, Src_J, 0);
+    if(map[Des_I][Des_J] == 0)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Opps!! You can't go there.");
+        msgBox.exec();
+    }
 }
 
 void MOVING::mouseMoveEvent(QMouseEvent * event)
@@ -218,7 +224,10 @@ void MOVING::on_pushButton_clicked()
 void MOVING::on_pushButton_2_clicked()
 {
     //coloring path
+    memset(rectangle, NULL, sizeof(rectangle));
     int k = 0;
+    FindDst();
+    CheckPath();
 
     for(int i = 0; i < 35; i++)
     {
@@ -235,11 +244,18 @@ void MOVING::on_pushButton_2_clicked()
     {
         for(int j = 0; j < 75; j++)
         {
-           if(ans[i][j])
+           if(ans[i][j] == 1)
            {
                QBrush blueBrush(Qt::blue);
                QPen bluePen(Qt::blue);
                rectangle[k] = scene.addRect(j * 10, i * 10, 10, 10, bluePen, blueBrush);
+               k++;
+           }
+           else if(ans[i][j] == 2)
+           {
+               QBrush redBrush(Qt::red);
+               QPen redPen(Qt::red);
+               rectangle[k] = scene.addRect(j * 10, i * 10, 10, 10, redPen, redBrush);
                k++;
            }
         }
