@@ -19,16 +19,22 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     moving.cpp \
     trisol.c \
-    kfsol.c
+    kfsol.c \
+    bluetoothsetting.cpp \
+    virtualkeyboard.cpp
 
 HEADERS  += mainwindow.h \
     moving.h \
     shm.h \
     trisol.h \
-    kfsol.h
+    kfsol.h \
+    bluetoothsetting.h \
+    virtualkeyboard.h
 
 FORMS    += mainwindow.ui \
-    moving.ui
+    moving.ui \
+    bluetoothsetting.ui \
+    virtualkeyboard.ui
 
 RESOURCES += \
     MyResources.qrc
