@@ -19,16 +19,22 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     moving.cpp \
     trisol.c \
-    kfsol.c
+    kfsol.c \
+    mainmenu.cpp \
+    mapsettings.cpp
 
 HEADERS  += mainwindow.h \
     moving.h \
     shm.h \
     trisol.h \
-    kfsol.h
+    kfsol.h \
+    mainmenu.h \
+    mapsettings.h
 
 FORMS    += mainwindow.ui \
-    moving.ui
+    moving.ui \
+    mainmenu.ui \
+    mapsettings.ui
 
 RESOURCES += \
     MyResources.qrc

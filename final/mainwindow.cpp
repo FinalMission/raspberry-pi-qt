@@ -7,6 +7,8 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <errno.h>
+#include "mainmenu.h"
+
 Packet * packetshm;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -16,17 +18,32 @@ MainWindow::MainWindow(QWidget *parent) :
     id_shm = shmget((key_t)KEY_SHM, sizeof(Packet[3]), 0777);
     if(id_shm == ERROR)
     {
-        printf("error: %s (%d)\n", strerror(errno), __LINE__);
+  //      printf("error: %s (%d)\n", strerror(errno), __LINE__);
         //return EXIT_FAILURE;
     }
     packetshm = (Packet *)shmat(id_shm, (void *)0, 0);
     if(packetshm == (Packet *)ERROR)
     {
-        printf("error: %s (%d)\n", strerror(errno), __LINE__);
+   //     printf("error: %s (%d)\n", strerror(errno), __LINE__);
         //return EXIT_FAILURE;
     }
 
+    QPixmap pix(":/img/flashscreen.png");
+    scene.addPixmap(pix);
+    ui->graphicsView->setScene(&scene);
+    ui->graphicsView->show();
     ui->setupUi(this);
+
+    flashScreen();
+}
+
+void MainWindow::flashScreen(void)
+{
+     sleep(3);
+    MainMenu dlg;
+    //dlg.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "MOVING GUI PROTOTYPE"));
+    dlg.setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    dlg.exec();
 }
 
 MainWindow::~MainWindow()
@@ -40,9 +57,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+/*void MainWindow::on_pushButton_clicked()
 {
     MOVING dlg;
-    dlg.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "MOVING GUI PROTOTYPE"));
+    //dlg.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "MOVING GUI PROTOTYPE"));
+    dlg.setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     dlg.exec();
-}
+}*/

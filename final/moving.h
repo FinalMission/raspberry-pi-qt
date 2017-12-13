@@ -27,7 +27,8 @@ public:
     ~MOVING();
     int mx,my;
   //  bool viewportEvent(QEvent *event);
-
+     Ui::MOVING *ui;
+    QGraphicsScene scene;
 public slots:
     void shmchk(void);
 
@@ -36,8 +37,8 @@ private slots:
    void on_horizontalSlider_sliderMoved(int position);
 
 private:
-    Ui::MOVING *ui;
-    QGraphicsScene scene;
+
+
     QGraphicsEllipseItem *ellipse;
     bool Pressed;
     qreal totalScaleFactor;

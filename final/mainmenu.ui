@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainMenu</class>
+ <widget class="QDialog" name="MainMenu">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>640</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QPushButton" name="mapButton">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>140</y>
+     <width>104</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>map</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="BLEButton">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>210</y>
+     <width>104</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>blesetting</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mapsetButton">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>280</y>
+     <width>104</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>mapsetting</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

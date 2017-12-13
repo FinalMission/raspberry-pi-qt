@@ -19,8 +19,8 @@ MOVING::MOVING(QWidget *parent) :
     nowZoom = 100.0;
 
     Pressed=false;
-    QPixmap pix(":/img/9thfloor2.png");
-    scene.addPixmap(pix);
+ //   QPixmap pix(":/img/9thfloor.png");
+ //   scene.addPixmap(pix);
     ui->graphicsView->setScene(&scene);
     ui->graphicsView->show();
     QBrush redBrush(Qt::red);
@@ -48,9 +48,9 @@ void MOVING::shmchk(void)
    if(packetshm != NULL)
    {
 //     qDebug() << "received packet addr is... " << *(int *)&packetshm[0];
-       qDebug("[pi0      w]received rssi value is....%d" , ((signed int)packetshm[0].rssi | 0xffffff00)  );
-       qDebug("[pi1 case o]received rssi value is....%d" , ((signed int)packetshm[1].rssi | 0xffffff00)  );
-       qDebug("[pi1 case x]received rssi value is....%d" , ((signed int)packetshm[2].rssi | 0xffffff00)  );
+//       qDebug("[pi0      w]received rssi value is....%d" , ((signed int)packetshm[0].rssi | 0xffffff00)  );
+//       qDebug("[pi1 case o]received rssi value is....%d" , ((signed int)packetshm[1].rssi | 0xffffff00)  );
+//       qDebug("[pi1 case x]received rssi value is....%d" , ((signed int)packetshm[2].rssi | 0xffffff00)  );
        //trisol(packetshm);
        //
        get_x_pos = 80.0 + (double)(rand()%41);

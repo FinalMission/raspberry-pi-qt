@@ -26,10 +26,10 @@
   <widget class="QSlider" name="horizontalSlider">
    <property name="geometry">
     <rect>
-     <x>820</x>
-     <y>540</y>
-     <width>160</width>
-     <height>16</height>
+     <x>809</x>
+     <y>485</y>
+     <width>171</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="orientation">

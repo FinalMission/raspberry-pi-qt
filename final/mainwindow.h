@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsView>
 
 namespace Ui {
 class MainWindow;
@@ -14,12 +15,14 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void flashScreen();
     
 private slots:
     void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
+    QGraphicsScene scene;
     int id_shm;
     int ret;
 };
