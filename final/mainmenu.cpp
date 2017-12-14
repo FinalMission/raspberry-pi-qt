@@ -2,6 +2,7 @@
 #include "ui_mainmenu.h"
 #include "moving.h"
 #include "mapsettings.h"
+#include "bluetoothsetting.h"
 
 MainMenu::MainMenu(QWidget *parent) :
     QDialog(parent),
@@ -24,5 +25,11 @@ void MainMenu::on_mapButton_clicked()
 void MainMenu::on_mapsetButton_clicked()
 {
     mapsettings dlg;
+    dlg.exec();
+}
+
+void MainMenu::on_BLEButton_clicked()
+{
+    bluetoothSetting dlg;
     dlg.exec();
 }

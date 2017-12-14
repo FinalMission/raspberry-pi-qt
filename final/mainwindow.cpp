@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     packetshm = (Packet *)shmat(id_shm, (void *)0, 0);
     if(packetshm == (Packet *)ERROR)
     {
-   //     printf("error: %s (%d)\n", strerror(errno), __LINE__);
+        printf("attach shared memory error: %s (%d)\n", strerror(errno), __LINE__);
         //return EXIT_FAILURE;
     }
 
@@ -52,7 +52,7 @@ MainWindow::~MainWindow()
     ret = shmdt(packetshm);
     if(ret == ERROR)
     {
-        printf("error: %s (%d)\n", strerror(errno), __LINE__);
+        printf("detach shared memory error: %s (%d)\n", strerror(errno), __LINE__);
         //return EXIT_FAILURE;
     }
     delete ui;

@@ -20,6 +20,8 @@ private slots:
 
     void on_mapsetButton_clicked();
 
+    void on_BLEButton_clicked();
+
 private:
     Ui::MainMenu *ui;
 };

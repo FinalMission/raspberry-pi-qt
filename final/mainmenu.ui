@@ -16,9 +16,9 @@
   <widget class="QPushButton" name="mapButton">
    <property name="geometry">
     <rect>
-     <x>500</x>
+     <x>193</x>
      <y>140</y>
-     <width>104</width>
+     <width>411</width>
      <height>31</height>
     </rect>
    </property>
@@ -29,22 +29,22 @@
   <widget class="QPushButton" name="BLEButton">
    <property name="geometry">
     <rect>
-     <x>500</x>
+     <x>313</x>
      <y>210</y>
-     <width>104</width>
+     <width>291</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>blesetting</string>
+    <string>bluetooth setting</string>
    </property>
   </widget>
   <widget class="QPushButton" name="mapsetButton">
    <property name="geometry">
     <rect>
-     <x>500</x>
+     <x>393</x>
      <y>280</y>
-     <width>104</width>
+     <width>211</width>
      <height>31</height>
     </rect>
    </property>
