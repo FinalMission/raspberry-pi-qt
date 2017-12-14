@@ -12,6 +12,7 @@
 #include <QWheelEvent>
 #include <QGraphicsScene>
 #include <QGraphicsItem>
+#include "kfsol.h"
 
 
 namespace Ui {
@@ -44,8 +45,16 @@ private:
     qreal totalScaleFactor;
     double beforeZoom;
     double nowZoom;
-    double get_x_pos;
-    double get_y_pos;
+    double result_x_pos;
+    double result_y_pos;
+    signed int tx_power[3] = {-44,-59,-59};
+    signed int rssi_buf[3];
+    double kalman_filtered_dist[3] = {1,1,1};
+    SKalman1D kalman_filter[3] = {
+        {1,10,50,500},
+        {12,10,10,100},
+        {13,10,10,100},
+    };
 
 protected:
 //    virtual void wheelEvent(QWheelEvent* event);

@@ -8,6 +8,8 @@
 #include <sys/shm.h>
 #include <errno.h>
 #include "mainmenu.h"
+#include "bluetoothsetting.h"
+#include<string.h>
 
 Packet * packetshm;
 
@@ -15,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    id_shm = shmget((key_t)KEY_SHM, sizeof(Packet[3]), 0777);
+    id_shm = shmget((key_t)KEY_SHM, sizeof(Packet[3]), 0777|IPC_CREAT);
     if(id_shm == ERROR)
     {
   //      printf("error: %s (%d)\n", strerror(errno), __LINE__);
@@ -51,7 +53,7 @@ MainWindow::~MainWindow()
     ret = shmdt(packetshm);
     if(ret == ERROR)
     {
-        printf("error: %s (%d)\n", strerror(errno), __LINE__);
+        //printf("error: %s (%d)\n", strerror(errno), __LINE__);
         //return EXIT_FAILURE;
     }
     delete ui;
@@ -63,4 +65,12 @@ MainWindow::~MainWindow()
     //dlg.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "MOVING GUI PROTOTYPE"));
     dlg.setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     dlg.exec();
-}*/
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    bluetoothSetting dlg;
+    memset(dlg.chkEllipse, 0, sizeof(dlg.chkEllipse));
+    dlg.msgboxchk = 0;
+    dlg.exec();
+}
