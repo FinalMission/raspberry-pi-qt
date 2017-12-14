@@ -8,6 +8,4 @@ typedef struct{
     double	R;  //~ 측정 공분산 행렬 // R이 Q보다 큼
 }SKalman1D;
 
-void KalmanPredictUpdate1D(SKalman1D *kalman, double NewData);
-
 #endif

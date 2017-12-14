@@ -14,6 +14,7 @@ class VirtualKeyboard : public QDialog
 public:
     explicit VirtualKeyboard(QWidget *parent = 0);
     ~VirtualKeyboard();
+    void GetString(char *);
     
 private slots:
     void on_One_clicked();

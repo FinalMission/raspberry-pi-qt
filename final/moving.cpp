@@ -3,11 +3,13 @@
 #include <QScrollBar>
 #include <QTouchEvent>
 #include "shm.h"
-#include "kfsol.h"
 #include "trisol.h"
 #include <QTimer>
 #include <stdio.h>
+#include <math.h>
+#include "kfsol.h"
 
+extern void KalmanPredictUpdate1D(SKalman1D *, double);
 extern Packet * packetshm;
 
 MOVING::MOVING(QWidget *parent) :
@@ -44,18 +46,26 @@ MOVING::MOVING(QWidget *parent) :
 
 void MOVING::shmchk(void)
 {
-   qDebug() << "timer debugging";
    if(packetshm != NULL)
    {
-//     qDebug() << "received packet addr is... " << *(int *)&packetshm[0];
-       qDebug("[pi0      w]received rssi value is....%d" , ((signed int)packetshm[0].rssi | 0xffffff00)  );
-       qDebug("[pi1 case o]received rssi value is....%d" , ((signed int)packetshm[1].rssi | 0xffffff00)  );
-       qDebug("[pi1 case x]received rssi value is....%d" , ((signed int)packetshm[2].rssi | 0xffffff00)  );
-       //trisol(packetshm);
-       //
-       get_x_pos = 80.0 + (double)(rand()%41);
-       get_y_pos = 180.0+ (double)(rand()%41);
-       ellipse->setPos(get_x_pos,get_y_pos);
+       //qDebug("filter ~ %f", kalman_filter.X);
+       //qDebug("[pi0      w]received rssi value is....%d" , ((signed int)packetshm[0].rssi | 0xffffff00)  );
+
+       rssi_buf[0] = ((signed int)packetshm[0].rssi | 0xffffff00);
+       rssi_buf[1] = ((signed int)packetshm[1].rssi | 0xffffff00);
+       rssi_buf[2] = ((signed int)packetshm[2].rssi | 0xffffff00);
+
+       KalmanPredictUpdate1D( &kalman_filter[0], pow(10, (tx_power[0] - rssi_buf[0])/20.0) );
+
+
+       qDebug("BLE[0] distance : %.2f m !!", kalman_filter[0].X );
+
+        //qDebug("BLE[0] distance : %.2f m !!", pow(10, (tx_power[0] - rssi_buf[0])/20.0) );
+       //qDebug("BLE[2] distance : %.2f m !!", pow(10, (tx_power[2] - rssi_buf[2])/20.0) );
+
+       result_x_pos = 80.0 + (double)(rand()%41);
+       result_y_pos = 180.0+ (double)(rand()%41);
+       ellipse->setPos(result_x_pos,result_y_pos);
    }
 }
 

@@ -16,9 +16,9 @@ class bluetoothSetting : public QDialog
 public:
     explicit bluetoothSetting(QWidget *parent = 0);
     ~bluetoothSetting();
-    QGraphicsEllipseItem *ellipse0;
-    QGraphicsEllipseItem *ellipse1;
-    QGraphicsEllipseItem *ellipse2;
+    QGraphicsEllipseItem * ellipse0;
+    QGraphicsEllipseItem * ellipse1;
+    QGraphicsEllipseItem * ellipse2;
 private slots:
 
     void on_pushButton_2_clicked();

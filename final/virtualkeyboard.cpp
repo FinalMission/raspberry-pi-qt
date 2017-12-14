@@ -1,5 +1,7 @@
 #include "virtualkeyboard.h"
 #include "ui_virtualkeyboard.h"
+#include <stdio.h>
+#include <stdlib.h>
 char value[256];
 int char_count;
 
@@ -13,6 +15,11 @@ VirtualKeyboard::VirtualKeyboard(QWidget *parent) :
 VirtualKeyboard::~VirtualKeyboard()
 {
     delete ui;
+}
+
+void VirtualKeyboard::GetString(char * outputvalue)
+{
+    strcpy(outputvalue, value);
 }
 
 void VirtualKeyboard::on_One_clicked()

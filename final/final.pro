@@ -17,14 +17,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    moving.cpp \
-    trisol.c \
-    kfsol.c \
-    bluetoothsetting.cpp \
-    virtualkeyboard.cpp
+        moving.cpp \
+        trisol.c \
+        kfsol.c \
+        bluetoothsetting.cpp \
+        virtualkeyboard.cpp
 
 HEADERS  += mainwindow.h \
     moving.h \
+    kfsol.h \
     shm.h \
     trisol.h \
     kfsol.h \
