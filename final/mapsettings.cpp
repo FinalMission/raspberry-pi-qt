@@ -19,11 +19,11 @@ void mapsettings::on_pushButton_2_clicked()
 {
     MOVING dlg;
 
-//    QString fileName = QFileDialog::getOpenFileName(this,tr("ChangeFloor"),":/img",tr("images(*.bmp)"));
-    //dlg.ui->graphicsView->setPixmap(QPixmap(fileName));
-//    QPixmap pix(fileName);
+    QString fileName = QFileDialog::getOpenFileName(this,tr("ChangeFloor"),":/img",tr("images(*.bmp)"));
+   // dlg.ui->graphicsView-> setPixmap(QPixmap(fileName));
+   // QPixmap pix(fileName);
  //   dlg.scene.addPixmap(pix);
   //  dlg.ui->graphicsView->setScene(&scene);
 //    dlg.ui->graphicsView->show();
- //   dlg.exec();
+    dlg.exec();
 }

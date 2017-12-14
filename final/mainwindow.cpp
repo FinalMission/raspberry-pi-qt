@@ -28,18 +28,20 @@ MainWindow::MainWindow(QWidget *parent) :
         //return EXIT_FAILURE;
     }
 
-    QPixmap pix(":/img/flashscreen.png");
-    scene.addPixmap(pix);
-    ui->graphicsView->setScene(&scene);
-    ui->graphicsView->show();
-    ui->setupUi(this);
+ ui->setupUi(this);
 
-    flashScreen();
+
+ QPixmap pix(":/img/flashscreen.png");
+  scene1.addPixmap(pix);
+  ui->graphicsView->setScene(&scene1);
+  ui->graphicsView->show();
+  ui->mainToolBar->hide();
+          //setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+  QTimer::singleShot(3000, this, SLOT(flashScreen()));
 }
 
 void MainWindow::flashScreen(void)
 {
-     sleep(3);
     MainMenu dlg;
     //dlg.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "MOVING GUI PROTOTYPE"));
     dlg.setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
