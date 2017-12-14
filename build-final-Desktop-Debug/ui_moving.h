@@ -36,7 +36,7 @@ public:
         graphicsView->setGeometry(QRect(20, 20, 971, 541));
         horizontalSlider = new QSlider(MOVING);
         horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
-        horizontalSlider->setGeometry(QRect(820, 540, 160, 16));
+        horizontalSlider->setGeometry(QRect(809, 485, 171, 71));
         horizontalSlider->setOrientation(Qt::Horizontal);
 
         retranslateUi(MOVING);

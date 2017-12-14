@@ -2,6 +2,7 @@
 #include "ui_virtualkeyboard.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 char value[256];
 int char_count;
 
@@ -9,6 +10,8 @@ VirtualKeyboard::VirtualKeyboard(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::VirtualKeyboard)
 {
+    memset(value, 0, sizeof(value));
+    char_count = 0;
     ui->setupUi(this);
 }
 
@@ -92,4 +95,9 @@ void VirtualKeyboard::on_Backspace_clicked()
 {
     value[--char_count] = NULL;
     ui->TypedText->setText(value);
+}
+
+void VirtualKeyboard::on_DoneButton_clicked()
+{
+    close();
 }

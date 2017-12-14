@@ -52,13 +52,13 @@ public:
     {
         if (bluetoothSetting->objectName().isEmpty())
             bluetoothSetting->setObjectName(QStringLiteral("bluetoothSetting"));
-        bluetoothSetting->resize(750, 475);
+        bluetoothSetting->resize(835, 516);
         graphicsView = new QGraphicsView(bluetoothSetting);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
-        graphicsView->setGeometry(QRect(0, 0, 750, 351));
+        graphicsView->setGeometry(QRect(0, 1, 821, 401));
         horizontalLayoutWidget = new QWidget(bluetoothSetting);
         horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(20, 360, 721, 23));
+        horizontalLayoutWidget->setGeometry(QRect(22, 398, 731, 29));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -84,7 +84,7 @@ public:
 
         verticalLayoutWidget = new QWidget(bluetoothSetting);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(20, 379, 721, 61));
+        verticalLayoutWidget->setGeometry(QRect(22, 420, 731, 61));
         verticalLayout_2 = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
@@ -151,7 +151,7 @@ public:
 
         pushButton_5 = new QPushButton(bluetoothSetting);
         pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
-        pushButton_5->setGeometry(QRect(570, 442, 171, 31));
+        pushButton_5->setGeometry(QRect(583, 480, 171, 31));
 
         retranslateUi(bluetoothSetting);
 

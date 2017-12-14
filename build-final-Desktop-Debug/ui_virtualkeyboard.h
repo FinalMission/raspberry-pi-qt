@@ -41,12 +41,13 @@ public:
     QPushButton *Backspace;
     QLabel *label;
     QLabel *TypedText;
+    QPushButton *DoneButton;
 
     void setupUi(QDialog *VirtualKeyboard)
     {
         if (VirtualKeyboard->objectName().isEmpty())
             VirtualKeyboard->setObjectName(QStringLiteral("VirtualKeyboard"));
-        VirtualKeyboard->resize(496, 272);
+        VirtualKeyboard->resize(496, 264);
         gridLayoutWidget = new QWidget(VirtualKeyboard);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
         gridLayoutWidget->setGeometry(QRect(170, 10, 311, 231));
@@ -149,6 +150,9 @@ public:
         TypedText = new QLabel(VirtualKeyboard);
         TypedText->setObjectName(QStringLiteral("TypedText"));
         TypedText->setGeometry(QRect(10, 60, 131, 51));
+        DoneButton = new QPushButton(VirtualKeyboard);
+        DoneButton->setObjectName(QStringLiteral("DoneButton"));
+        DoneButton->setGeometry(QRect(20, 190, 111, 51));
 
         retranslateUi(VirtualKeyboard);
 
@@ -172,6 +176,7 @@ public:
         Backspace->setText(QApplication::translate("VirtualKeyboard", "Backspace", Q_NULLPTR));
         label->setText(QApplication::translate("VirtualKeyboard", "You Typed in:", Q_NULLPTR));
         TypedText->setText(QString());
+        DoneButton->setText(QApplication::translate("VirtualKeyboard", "Done", Q_NULLPTR));
     } // retranslateUi
 
 };
