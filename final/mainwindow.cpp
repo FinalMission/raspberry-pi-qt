@@ -8,8 +8,6 @@
 #include <sys/shm.h>
 #include <errno.h>
 #include "mainmenu.h"
-#include "bluetoothsetting.h"
-#include<string.h>
 
 Packet * packetshm;
 
@@ -17,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    id_shm = shmget((key_t)KEY_SHM, sizeof(Packet[3]), 0777|IPC_CREAT);
+    id_shm = shmget((key_t)KEY_SHM, sizeof(Packet[3]), 0777);
     if(id_shm == ERROR)
     {
   //      printf("error: %s (%d)\n", strerror(errno), __LINE__);
@@ -30,18 +28,19 @@ MainWindow::MainWindow(QWidget *parent) :
         //return EXIT_FAILURE;
     }
 
-    QPixmap pix(":/img/flashscreen.png");
-    scene.addPixmap(pix);
-    ui->graphicsView->setScene(&scene);
-    ui->graphicsView->show();
-    ui->setupUi(this);
+  ui->setupUi(this);
 
-    flashScreen();
+
+  QPixmap pix(":/img/flashscreen.png");
+  scene1.addPixmap(pix);
+  ui->graphicsView->setScene(&scene1);
+  ui->graphicsView->show();
+  this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+  QTimer::singleShot(3000, this, SLOT(flashScreen()));
 }
 
 void MainWindow::flashScreen(void)
 {
-     sleep(3);
     MainMenu dlg;
     //dlg.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "MOVING GUI PROTOTYPE"));
     dlg.setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
@@ -53,7 +52,7 @@ MainWindow::~MainWindow()
     ret = shmdt(packetshm);
     if(ret == ERROR)
     {
-        //printf("error: %s (%d)\n", strerror(errno), __LINE__);
+        printf("error: %s (%d)\n", strerror(errno), __LINE__);
         //return EXIT_FAILURE;
     }
     delete ui;
@@ -65,12 +64,4 @@ MainWindow::~MainWindow()
     //dlg.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "MOVING GUI PROTOTYPE"));
     dlg.setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     dlg.exec();
-}
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    bluetoothSetting dlg;
-    memset(dlg.chkEllipse, 0, sizeof(dlg.chkEllipse));
-    dlg.msgboxchk = 0;
-    dlg.exec();
-}
+}*/

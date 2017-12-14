@@ -14,6 +14,8 @@ class mapsettings : public QDialog
 public:
     explicit mapsettings(QWidget *parent = 0);
     ~mapsettings();
+ QString fileName;
+
     
 private slots:
     void on_pushButton_2_clicked();

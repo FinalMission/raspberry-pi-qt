@@ -6,8 +6,8 @@
 
 QT       += core gui
 QT       += widgets
-#QT += bluetooth
-#QT += core
+QT += bluetooth
+QT += core
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,26 +22,19 @@ SOURCES += main.cpp\
     kfsol.c \
     mainmenu.cpp \
     mapsettings.cpp
-    bluetoothsetting.cpp \
-    virtualkeyboard.cpp
 
 HEADERS  += mainwindow.h \
     moving.h \
-    kfsol.h \
     shm.h \
     trisol.h \
     kfsol.h \
     mainmenu.h \
-    mapsettings.h \
-    bluetoothsetting.h \
-    virtualkeyboard.h
+    mapsettings.h
 
 FORMS    += mainwindow.ui \
     moving.ui \
     mainmenu.ui \
-    mapsettings.ui \
-       bluetoothsetting.ui \
-        virtualkeyboard.ui
+    mapsettings.ui
 
 RESOURCES += \
     MyResources.qrc
