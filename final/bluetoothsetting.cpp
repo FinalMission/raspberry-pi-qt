@@ -140,7 +140,6 @@ void bluetoothSetting::on_pushButton_2_clicked()
         double value = atof(ValueCharString);
 
         kalman_filter[0].X = value;
-        printf("%f\n", value);
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
 //        msgBox.exec();
@@ -336,7 +335,6 @@ void bluetoothSetting::on_pushButton_6_clicked()
         dlg.GetString(ValueCharString);
         double value = atof(ValueCharString);
         tx_power[0] = value;
-        printf("%f\n", value);
         QMessageBox msgBox;
         msgBox.setText("The value has successfully changed.");
         msgBox.exec();
