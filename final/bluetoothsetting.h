@@ -20,8 +20,8 @@ public:
     QGraphicsEllipseItem * ellipse0;
     QGraphicsEllipseItem * ellipse1;
     QGraphicsEllipseItem * ellipse2;
-    int chkEllipse[3] = {0, 0, 0};
-    int msgboxchk = 0;
+    int chkEllipse[3];
+    int msgboxchk;
 private slots:
 
     void on_pushButton_2_clicked();

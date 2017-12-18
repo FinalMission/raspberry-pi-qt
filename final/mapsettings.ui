@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>436</width>
-    <height>233</height>
+    <width>317</width>
+    <height>198</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -96,7 +96,8 @@
       </property>
       <property name="icon">
        <iconset theme="setting">
-        <normaloff>.</normaloff>.</iconset>
+        <normaloff/>
+       </iconset>
       </property>
      </widget>
     </item>

@@ -16,16 +16,18 @@
   <widget class="QPushButton" name="mapButton">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>110</y>
+     <x>266</x>
+     <y>0</y>
      <width>271</width>
-     <height>251</height>
+     <height>481</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">#mapButton
 {
-	background-image: url(:/img/mapIcon.png);
+	background-image: url(:/img/mapIcon3.png);
+	background-color: yellow;
+	border: none;
 }</string>
    </property>
    <property name="text">
@@ -35,11 +37,19 @@
   <widget class="QPushButton" name="BLEButton">
    <property name="geometry">
     <rect>
-     <x>-4</x>
+     <x>-3</x>
      <y>0</y>
      <width>271</width>
      <height>481</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#BLEButton
+{
+	background-image: url(:/img/bluetoothsettingIcon3.png);
+	background-color: yellow;
+	border: none;
+}</string>
    </property>
    <property name="text">
     <string>bluetooth setting</string>
@@ -48,11 +58,19 @@
   <widget class="QPushButton" name="mapsetButton">
    <property name="geometry">
     <rect>
-     <x>535</x>
+     <x>536</x>
      <y>0</y>
      <width>266</width>
      <height>481</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#mapsetButton
+{
+	background-image: url(:/img/mapsettingIcon3.png);
+	background-color: yellow;
+	border: none;
+}</string>
    </property>
    <property name="text">
     <string>mapsetting</string>
